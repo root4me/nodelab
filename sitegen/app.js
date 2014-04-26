@@ -9,7 +9,6 @@ var draftFolder = 'draft';
 var templateFolder = "template";
 var publishFolder = "publish";
 
-
 var draftList = fs.readdirSync(draftFolder);
 
 for (var i = 0; i < draftList.length; i++) {
@@ -28,6 +27,7 @@ function isValidDraft(markdownfile) {
     if (article.title === undefined) return false;
     return true;
 }
+
 
 function generatehtml(templateName, templateFolder, draftFile, draftFolder) {
 
@@ -66,6 +66,10 @@ function generatehtml(templateName, templateFolder, draftFile, draftFolder) {
             console.log('source : ' + draftFile + ' -> dest : ' + publishFileName);
         }
         else {
+
+            if (!(fs.existsSync(publishFolder))) {
+                fs.mkdirSync(publishFolder);
+            }
             fs.writeFileSync(publishFileName, pageText, "utf8");
 
             console.log('-- published : ' + publishFileName);
