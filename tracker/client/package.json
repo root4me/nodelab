@@ -1,0 +1,11 @@
+{
+    "name": "trackerClient",
+    "description": "app to record and track activities",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "socket.io-client": "*",
+        "node-uuid": "*"
+    },
+    "author": "Harish"
+}
