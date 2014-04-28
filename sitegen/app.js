@@ -15,7 +15,11 @@ var draftList = fs.readdirSync(draftFolder);
 for (var i = 0; i < draftList.length; i++) {
 
     console.log(path.join(draftFolder, draftList[i]));
-    generatehtml("post.html",templateFolder,draftList[i],draftFolder);
+
+    if (draftList[i].indexOf('_') !== 0) {
+        generatehtml("post.html", templateFolder, draftList[i], draftFolder);
+    }
+
 }
 
 
@@ -56,11 +60,18 @@ function generatehtml(templateName, templateFolder, draftFile, draftFolder) {
     // console.log(pageText);
 
     if (publishFileName !== null) {
-        fs.writeFileSync(publishFileName, pageText, "utf8");
 
-        console.log('-- published : ' + publishFileName);
-        // Prepend the draft file with an _
-        fs.renameSync(path.join(draftFolder, draftFile), path.join(draftFolder, '_' + draftFile));
+        if (fs.existsSync(publishFileName)) {
+            console.log('uh oh .. destination file exists');
+            console.log('source : ' + draftFile + ' -> dest : ' + publishFileName);
+        }
+        else {
+            fs.writeFileSync(publishFileName, pageText, "utf8");
+
+            console.log('-- published : ' + publishFileName);
+            // Prepend the draft file with an _
+            fs.renameSync(path.join(draftFolder, draftFile), path.join(draftFolder, '_' + draftFile));
+        }
     }
 
 }
