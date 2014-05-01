@@ -31,12 +31,6 @@ module.exports.getDraftFiles = function(data) {
     return files;
 }
 
-var newContentList = [];
-
-module.exports.newContentList = function() {
-    return newContentList;
-}
-
 module.exports.createPost = function(draftFile) {
 
     console.log(draftFile.path + ' -> ' + draftFile.name);
@@ -84,3 +78,13 @@ module.exports.createPost = function(draftFile) {
         }
     }
 }
+
+
+module.exports.saveMetadata = function(data) {
+    // Save the list of metadat gathered for next time this toll runs
+    
+    fs.writeFileSync("index.json", JSON.stringify(data));
+}
+
+
+
