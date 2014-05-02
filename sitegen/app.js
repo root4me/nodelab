@@ -7,6 +7,7 @@ var drafts = fileman.getDraftFiles('draft');
 
 for (var i = 0 ; i < drafts.length; i++)
 {
+    //fileman.gatherMetadata('d');
     fileman.createPost(drafts[i]);
 }
 

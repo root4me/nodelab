@@ -11,6 +11,17 @@ var draftFolder = 'draft',
     postTemplate = 'post.html',
     draftArchive = "draftArchive";
 
+/*
+        fileInfo.draftFile = 
+        fileInfo.draftPath =
+        fileInfo.publishFile =
+        fileInfo.PublishPath =
+        fileInfo.title =
+        fileInfo.author = 
+        fileInfo.createDate = 
+        fileInfo.updateDate
+        */
+
 module.exports.getDraftFiles = function(data) {
     var draftList = fs.readdirSync(data),
         files = [];
@@ -18,31 +29,40 @@ module.exports.getDraftFiles = function(data) {
     for (var i = 0; i < draftList.length; i++) {
         console.log(draftList[i]);
 
-        if (draftList[i].indexOf('_') === 0) {
-            console.log('vvv');
-        }
 
         files.push({
-            name: draftList[i],
-            path: draftFolder,
-            publishName: '',
+            draftFile: draftList[i],
+            draftPath: draftFolder,
+            publishFile: null,
+            PublishPath: null,
+            title: null,
+            author: null,
+            createDate: null,
+            updateDate: null,
+            process: true,
+            rejectReason: null,
         });
     }
+
     return files;
 }
 
-module.exports.createPost = function(draftFile) {
+module.exports.createPost = function(fileInfo) {
 
-    console.log(draftFile.path + ' -> ' + draftFile.name);
+    console.log(fileInfo.draftPath + ' -> ' + fileInfo.draftFile);
 
     var template = fs.readFileSync(path.join(templateFolder, postTemplate), 'utf8'),
-        article = frontMatter.loadFront(path.join(draftFile.path, draftFile.name), 'content');
+        article = frontMatter.loadFront(path.join(fileInfo.draftPath, fileInfo.draftFile), 'content');
+
+    getMetadata(fileInfo);
+
 
     if (article.title === undefined) {
-        console.log('-- Draft with out title can not be processed : ' + draftFile.name);
+        console.log('-- Draft with out title can not be processed : ' + fileInfo.draftFile);
         return;
     }
     else {
+
 
         var publishFileName = path.join(publishFolder, article.title.replace(/\s+/g, '-') + ".html"),
             pageBuilder = handlebars.compile(template),
@@ -55,7 +75,7 @@ module.exports.createPost = function(draftFile) {
 
         if (fs.existsSync(publishFileName)) {
             console.log('-- published content with same name exists .. skipping publish');
-            console.log('source : ' + draftFile.name + ' -> dest : ' + publishFileName);
+            console.log('source : ' + fileInfo.draftFile + ' -> dest : ' + publishFileName);
         }
         else {
 
@@ -72,9 +92,9 @@ module.exports.createPost = function(draftFile) {
             // Prepend the draft file with an _
             //fs.renameSync(path.join(draftFolder, draftFile), path.join(draftFolder, '_' + draftFile));
 
-            draftFile.publishName = publishFileName;
+            //           fileInfo.publishFile = publishFileName;
             // move draft to a archive folder
-            fs.renameSync(path.join(draftFile.path, draftFile.name) , path.join(draftArchive,draftFile.name));
+            //           fs.renameSync(path.join(fileInfo.draftPath, fileInfo.draftFIle), path.join(draftArchive, fileInfo.draftFile));
         }
     }
 }
@@ -82,9 +102,30 @@ module.exports.createPost = function(draftFile) {
 
 module.exports.saveMetadata = function(data) {
     // Save the list of metadat gathered for next time this toll runs
-    
+
     fs.writeFileSync("index.json", JSON.stringify(data));
 }
 
+var getMetadata = function(fileInfo) {
 
+    var article = frontMatter.loadFront(path.join(fileInfo.draftPath, fileInfo.draftFile), 'content');
 
+    if (article.title === undefined) {
+        fileInfo.process = false;
+        fileInfo.rejectReason = "Title not present";
+    }
+    else {
+        fileInfo.title = article.title;
+        fileInfo.PublishFile = path.join(publishFolder, article.title.replace(/\s+/g, '-') + ".html");
+    }
+
+    fileInfo.author = article.author;
+    fileInfo.createDate = Date(article.date);
+    if (article.updateDate !== undefined) {
+        fileInfo.updateDate = article.updateDate
+    }
+    else {
+        fileInfo.updateDate = null;
+    }
+
+}
