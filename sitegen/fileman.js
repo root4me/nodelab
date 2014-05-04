@@ -20,6 +20,8 @@ var draftFolder = 'draft',
         fileInfo.author = 
         fileInfo.createDate = 
         fileInfo.updateDate
+        process: true,
+        rejectReason: null,
         */
 
 module.exports.getDraftFiles = function(data) {
@@ -34,7 +36,7 @@ module.exports.getDraftFiles = function(data) {
             draftFile: draftList[i],
             draftPath: draftFolder,
             publishFile: null,
-            PublishPath: null,
+            publishPath: null,
             title: null,
             author: null,
             createDate: null,
@@ -56,15 +58,8 @@ module.exports.createPost = function(fileInfo) {
 
     getMetadata(fileInfo);
 
-
-    if (article.title === undefined) {
-        console.log('-- Draft with out title can not be processed : ' + fileInfo.draftFile);
-        return;
-    }
-    else {
-
-
-        var publishFileName = path.join(publishFolder, article.title.replace(/\s+/g, '-') + ".html"),
+    if (fileInfo.process === true) {
+        var publishFileName = path.join(fileInfo.publishPath, fileInfo.publishFile),
             pageBuilder = handlebars.compile(template),
             pageText = pageBuilder({
                 title: article.title,
@@ -73,30 +68,30 @@ module.exports.createPost = function(fileInfo) {
                 content: markdown.toHTML(article.content)
             });
 
-        if (fs.existsSync(publishFileName)) {
-            console.log('-- published content with same name exists .. skipping publish');
-            console.log('source : ' + fileInfo.draftFile + ' -> dest : ' + publishFileName);
+
+        if (!(fs.existsSync(fileInfo.publishPath))) {
+            fs.mkdirSync(fileInfo.publishPath);
         }
-        else {
-
-            if (!(fs.existsSync(publishFolder))) {
-                fs.mkdirSync(publishFolder);
-            }
-            if (!(fs.existsSync(draftArchive))) {
-                fs.mkdirSync(draftArchive);
-            }
-
-            fs.writeFileSync(publishFileName, pageText, "utf8");
-
-            console.log('-- published : ' + publishFileName);
-            // Prepend the draft file with an _
-            //fs.renameSync(path.join(draftFolder, draftFile), path.join(draftFolder, '_' + draftFile));
-
-            //           fileInfo.publishFile = publishFileName;
-            // move draft to a archive folder
-            //           fs.renameSync(path.join(fileInfo.draftPath, fileInfo.draftFIle), path.join(draftArchive, fileInfo.draftFile));
+        if (!(fs.existsSync(draftArchive))) {
+            fs.mkdirSync(draftArchive);
         }
+
+        fs.writeFileSync(publishFileName, pageText, "utf8");
+
+        console.log('-- published : ' + publishFileName);
+        // Prepend the draft file with an _
+        //fs.renameSync(path.join(draftFolder, draftFile), path.join(draftFolder, '_' + draftFile));
+
+        //           fileInfo.publishFile = publishFileName;
+        // move draft to a archive folder
+        //           fs.renameSync(path.join(fileInfo.draftPath, fileInfo.draftFIle), path.join(draftArchive, fileInfo.draftFile));
+        //}
+
     }
+    else {
+        console.log("-- Can not Process ... : " + fileInfo.rejectReason);
+    }
+
 }
 
 
@@ -116,11 +111,18 @@ var getMetadata = function(fileInfo) {
     }
     else {
         fileInfo.title = article.title;
-        fileInfo.PublishFile = path.join(publishFolder, article.title.replace(/\s+/g, '-') + ".html");
+        fileInfo.publishFile = article.title.replace(/\s+/g, '-') + ".html";
+        fileInfo.publishPath = publishFolder;
+
+        if (fs.existsSync(path.join(fileInfo.publishPath, fileInfo.publishFile))) {
+            fileInfo.process = false;
+            fileInfo.rejectReason = "Published content with same name exists";
+        }
     }
 
     fileInfo.author = article.author;
     fileInfo.createDate = Date(article.date);
+
     if (article.updateDate !== undefined) {
         fileInfo.updateDate = article.updateDate
     }
