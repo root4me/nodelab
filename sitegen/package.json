@@ -6,7 +6,8 @@
     "dependencies": {
         "markdown": "latest",
         "handlebars": "latest",
-        "yaml-front-matter": "latest"        
+        "yaml-front-matter": "latest",
+        "cheerio": "latest"
         },
     "author": "harish"
 }

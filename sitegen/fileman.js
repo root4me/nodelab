@@ -3,6 +3,7 @@ var fs = require('fs'),
     path = require('path'),
     markdown = require("markdown").markdown,
     handlebars = require("handlebars");
+var cheerio = require("cheerio");
 
 // These can go into a config file at some point
 var draftFolder = 'draft',
@@ -31,21 +32,23 @@ module.exports.getDraftFiles = function(data) {
     for (var i = 0; i < draftList.length; i++) {
         console.log(draftList[i]);
 
+        if (!(fs.statSync(path.join(draftFolder, draftList[i])).isDirectory())) {
 
-        files.push({
-            draftFile: draftList[i],
-            draftPath: draftFolder,
-            publishFile: null,
-            publishPath: null,
-            title: null,
-            author: null,
-            createDate: null,
-            updateDate: null,
-            process: true,
-            rejectReason: null,
-        });
+            files.push({
+                draftFile: draftList[i],
+                draftPath: draftFolder,
+                publishFile: null,
+                publishPath: null,
+                title: null,
+                author: null,
+                createDate: null,
+                updateDate: null,
+                process: true,
+                rejectReason: '',
+            });
+
+        }
     }
-
     return files;
 }
 
@@ -72,15 +75,49 @@ module.exports.createPost = function(fileInfo) {
         if (!(fs.existsSync(fileInfo.publishPath))) {
             fs.mkdirSync(fileInfo.publishPath);
         }
+        if (!(fs.existsSync(path.join(fileInfo.publishPath, 'images')))) {
+            fs.mkdirSync(path.join(fileInfo.publishPath, 'images'));
+        }
+
         if (!(fs.existsSync(draftArchive))) {
             fs.mkdirSync(draftArchive);
         }
 
-        fs.writeFileSync(publishFileName, pageText, "utf8");
+        var $ = cheerio.load(pageText);
+
+        $('img').each(function() {
+
+            //            console.log($(this));
+
+            var img = $(this).attr('src');
+            console.log("Img path : " + $(this).attr('src'));
+            if (!(fs.existsSync(path.join(draftFolder, img)))) {
+                fileInfo.publish = false;
+                fileInfo.rejectReason = "Missing source image file : " + path.join(draftFolder, img);
+                console.log(".. Can not process " + fileInfo.draftFile + " : " + fileInfo.rejectReason);
+                return;
+            }
+
+            if (fs.existsSync(path.join(publishFolder, '/images/' + img))) {
+                fileInfo.publish = false;
+                fileInfo.rejectReason = "Image file with same name exists : " + path.join(publishFolder, '/images/' + img);
+                console.log(".. Can not process " + fileInfo.draftFile + " : " + fileInfo.rejectReason);
+                return;
+            }
+
+            fs.createReadStream(path.join(draftFolder, img)).pipe(fs.createWriteStream(path.join(publishFolder, '/images/' + img)));
+
+            // fs.createReadStream('test.log').pipe(fs.createWriteStream('newLog.log'));
+
+            //fs.writeFilesync(path.join(publishFolder, '/images/' + img),path.join(draftFolder, img));
+        });
+
+        //getImgLinks(pageText);
+
+
+        //fs.writeFileSync(publishFileName, pageText, "utf8");
 
         console.log('-- published : ' + publishFileName);
-        // Prepend the draft file with an _
-        //fs.renameSync(path.join(draftFolder, draftFile), path.join(draftFolder, '_' + draftFile));
 
         //           fileInfo.publishFile = publishFileName;
         // move draft to a archive folder
@@ -100,6 +137,7 @@ module.exports.saveMetadata = function(data) {
 
     fs.writeFileSync("index.json", JSON.stringify(data));
 }
+
 
 var getMetadata = function(fileInfo) {
 
@@ -129,5 +167,24 @@ var getMetadata = function(fileInfo) {
     else {
         fileInfo.updateDate = null;
     }
+
+}
+
+
+var getImgLinks = function(html) {
+
+    // console.log(html);
+
+    var $ = cheerio.load(html);
+
+    $('a').each(function() {
+        console.log($(this).attr('href'));
+    });
+
+    $('img').each(function() {
+
+        console.log("Img path : " + $(this).attr('src'));
+        console.log(fs.existsSync(path.join(draftFolder, $(this).attr('src'))));
+    });
 
 }
