@@ -2,8 +2,8 @@ var fs = require('fs'),
     frontMatter = require('yaml-front-matter'),
     path = require('path'),
     markdown = require("markdown").markdown,
-    handlebars = require("handlebars");
-var cheerio = require("cheerio");
+    handlebars = require("handlebars"),
+    cheerio = require("cheerio");
 
 // These can go into a config file at some point
 var draftFolder = 'draft',
@@ -45,6 +45,7 @@ module.exports.getDraftFiles = function(data) {
                 updateDate: null,
                 process: true,
                 rejectReason: '',
+                images: []
             });
 
         }
@@ -86,43 +87,43 @@ module.exports.createPost = function(fileInfo) {
         var $ = cheerio.load(pageText);
 
         $('img').each(function() {
-
-            //            console.log($(this));
-
             var img = $(this).attr('src');
-            console.log("Img path : " + $(this).attr('src'));
+
             if (!(fs.existsSync(path.join(draftFolder, img)))) {
-                fileInfo.publish = false;
-                fileInfo.rejectReason = "Missing source image file : " + path.join(draftFolder, img);
-                console.log(".. Can not process " + fileInfo.draftFile + " : " + fileInfo.rejectReason);
+                fileInfo.process = false;
+                fileInfo.rejectReason += "Missing source image file : " + path.join(draftFolder, img);
                 return;
             }
 
             if (fs.existsSync(path.join(publishFolder, '/images/' + img))) {
-                fileInfo.publish = false;
-                fileInfo.rejectReason = "Image file with same name exists : " + path.join(publishFolder, '/images/' + img);
-                console.log(".. Can not process " + fileInfo.draftFile + " : " + fileInfo.rejectReason);
+                fileInfo.process = false;
+                fileInfo.rejectReason += "Image file with same name exists : " + path.join(publishFolder, '/images/' + img);
                 return;
             }
 
-            fs.createReadStream(path.join(draftFolder, img)).pipe(fs.createWriteStream(path.join(publishFolder, '/images/' + img)));
+            fileInfo.images.push({
+                src: path.join(draftFolder, img),
+                dest: path.join(publishFolder, img)
+            })
 
-            // fs.createReadStream('test.log').pipe(fs.createWriteStream('newLog.log'));
-
-            //fs.writeFilesync(path.join(publishFolder, '/images/' + img),path.join(draftFolder, img));
         });
 
-        //getImgLinks(pageText);
+        console.log(fileInfo)
 
+        if (fileInfo.process === true) {
+            fs.writeFileSync(publishFileName, pageText, "utf8");
+            console.log(fileInfo.images);
 
-        //fs.writeFileSync(publishFileName, pageText, "utf8");
+            fileInfo.images.forEach(function(img) {
+                fs.createReadStream(img.src).pipe(fs.createWriteStream(img.dest));
+            });
 
-        console.log('-- published : ' + publishFileName);
-
-        //           fileInfo.publishFile = publishFileName;
-        // move draft to a archive folder
-        //           fs.renameSync(path.join(fileInfo.draftPath, fileInfo.draftFIle), path.join(draftArchive, fileInfo.draftFile));
-        //}
+            console.log('-- published : ' + publishFileName);
+        }
+        else
+        {
+            console.log("-- Can not Process ... : " + fileInfo.rejectReason);
+        }
 
     }
     else {
@@ -137,7 +138,6 @@ module.exports.saveMetadata = function(data) {
 
     fs.writeFileSync("index.json", JSON.stringify(data));
 }
-
 
 var getMetadata = function(fileInfo) {
 

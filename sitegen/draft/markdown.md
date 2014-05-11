@@ -1,5 +1,5 @@
 ---
-title: Some Title
+title: All you can eat markdown
 author: author name
 date: 04/01/2014
 ---
@@ -76,7 +76,7 @@ Image syntax is very much like link syntax.
 
 Inline (titles are optional):
 
-![alt text](/img.jpg "Title")
+![alt text](images/img.jpg "Title")
 
 Reference-style:
 
