@@ -1,3 +1,8 @@
+---
+title: One title
+author: author name
+date: 04/01/2014
+---
 
 ### Test Heading
 Some content

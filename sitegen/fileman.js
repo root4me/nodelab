@@ -111,8 +111,8 @@ module.exports.createPost = function(fileInfo) {
         console.log(fileInfo)
 
         if (fileInfo.process === true) {
+
             fs.writeFileSync(publishFileName, pageText, "utf8");
-            console.log(fileInfo.images);
 
             fileInfo.images.forEach(function(img) {
                 fs.createReadStream(img.src).pipe(fs.createWriteStream(img.dest));
@@ -120,8 +120,7 @@ module.exports.createPost = function(fileInfo) {
 
             console.log('-- published : ' + publishFileName);
         }
-        else
-        {
+        else {
             console.log("-- Can not Process ... : " + fileInfo.rejectReason);
         }
 
@@ -159,7 +158,7 @@ var getMetadata = function(fileInfo) {
     }
 
     fileInfo.author = article.author;
-    fileInfo.createDate = Date(article.date);
+    fileInfo.createDate = article.date;
 
     if (article.updateDate !== undefined) {
         fileInfo.updateDate = article.updateDate

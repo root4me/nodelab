@@ -1,7 +1,7 @@
 ---
 title: All you can eat markdown
 author: author name
-date: 04/01/2014
+date: 05/01/2014
 ---
 
 
