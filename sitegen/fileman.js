@@ -90,7 +90,8 @@ module.exports.createPost = function(fileInfo) {
             var img = $(this).attr('src');
 
             if (!(fs.existsSync(path.join(draftFolder, img)))) {
-                fileInfo.process = false;
+            // Temporarily commenting this off since this prevents the content from getting generated if the link is to an external URL.
+               // fileInfo.process = false;
                 fileInfo.rejectReason += "Missing source image file : " + path.join(draftFolder, img);
                 return;
             }
