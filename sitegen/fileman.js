@@ -48,6 +48,7 @@ module.exports.getDraftFiles = function(data) {
                 images: []
             });
 
+            getMetadata(files[i]);
         }
     }
     return files;
@@ -60,7 +61,7 @@ module.exports.createPost = function(fileInfo) {
     var template = fs.readFileSync(path.join(templateFolder, postTemplate), 'utf8'),
         article = frontMatter.loadFront(path.join(fileInfo.draftPath, fileInfo.draftFile), 'content');
 
-    getMetadata(fileInfo);
+    //    getMetadata(fileInfo);
 
     if (fileInfo.process === true) {
         var publishFileName = path.join(fileInfo.publishPath, fileInfo.publishFile),
@@ -90,8 +91,8 @@ module.exports.createPost = function(fileInfo) {
             var img = $(this).attr('src');
 
             if (!(fs.existsSync(path.join(draftFolder, img)))) {
-            // Temporarily commenting this off since this prevents the content from getting generated if the link is to an external URL.
-               // fileInfo.process = false;
+                // Temporarily commenting this off since this prevents the content from getting generated if the link is to an external URL.
+                // fileInfo.process = false;
                 fileInfo.rejectReason += "Missing source image file : " + path.join(draftFolder, img);
                 return;
             }

@@ -61,7 +61,7 @@ list markers:
 ### Links ###
 
 This is an [example link](http://example.com/)
-This is an [example link](http://example.com/ "With a Title")Reference-style links allow you to refer to your links by names, which
+This is an [example link](http://example.com/ "With a Title") Reference-style links allow you to refer to your links by names, which
 you define elsewhere in your document:
 
 I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3]
