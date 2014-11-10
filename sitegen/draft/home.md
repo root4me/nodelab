@@ -1,0 +1,16 @@
+---
+title: Home
+author: root4me
+date: 10/31/2014
+next: Mini quadcopter build
+previous: Home
+---
+
+Cold, windy and snow shower when i walked out this morning. 34 F with 28 mph wind they say ie: It is crazy cold if you are not wearing a decent jacket. And it is just Oct 31st !! There will be no better time to starting writing down what i did during summer and fall. 
+
+
+Day job had been creeping into nights and weekends like usual this year and as usual i did have that 'oh...shit' moment towards the end of summer when i realized that i didn't get to experience much sun in the summer. That being said; i did start another hobby. This time; a flying machine - a quadcopter. This is its story. 
+
+I have always been more of a builder than a user of the finished product when it comes to RC hobby projects. That has been evident from the two separate stints at RC automobile hobbies i had, once with electric car and another time with Nitro trucks. Well, that electric car got  a new life as arduino powered autonomous vehicle with scratch built motor controller two years ago. That is a topic for another time.
+
+But quadcopter has been such a blast to fly, it has truly been a fun experience to build and fly this really cool machine. Along the way, I learned how not to build one if you are an absolute beginner to hobby that involve quadcopters. 

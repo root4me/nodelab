@@ -29,7 +29,7 @@
                 <!-- </li>-->
                 <!-- </ul>-->
                 <!--</div>-->
-                <h1>root4me</small>
+                <h1><a href="home.html">root4me</a></small>
                 </h1>
                 <hr/>
             </div>
@@ -41,53 +41,30 @@
                         <a href="#">{{title}}</a>
                     </h3>
                     <h6>Written by
-                        <a href="#">{{author}} </a>on {{date}}</h6>{{{content}}}
-                    <div class="row">
-                        <div class="large-6 columns">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a condimentum
-                                est. In hac habitasse platea dictumst. Nullam pharetra metus egestas purus
-                                cursus, ut pulvinar sapien porttitor. Nam ac hendrerit tortor, et varius
-                                justo. Donec venenatis pellentesque lacus eu dapibus. Donec molestie commodo
-                                commodo. Nullam a velit convallis, lobortis dui non, mattis magna.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a condimentum
-                                est. In hac habitasse platea dictumst. Nullam pharetra metus egestas purus
-                                cursus, ut pulvinar sapien porttitor. Nam ac hendrerit tortor, et varius
-                                justo. Donec venenatis pellentesque lacus eu dapibus. Donec molestie commodo
-                                commodo. Nullam a velit convallis, lobortis dui non, mattis magna.</p>
-                        </div>
-                        <div class="large-6 columns">
-                            <img src="http://placehold.it/400x240&text=[img]" />
-                        </div>
-                    </div>
+                        <a href="#">{{author}}</a>  on {{date}}
+                    </h6>
+                        
+                    {{{content}}}
+                            
                 </article>
-                <hr/>
             </div>
         </div>
-        <footer class="row">
-            <div class="large-12 columns">
-                <hr/>
-                <div class="row">
-                    <div class="large-6 columns">
-                        <p>© Copyright root4me</p>
-                    </div>
-                    <div class="large-6 columns">
-                        <ul class="inline-list right">
-                            <li>
-                                <a href="#">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="row">
+            <hr/>
+            <div class="large-6 columns">
+                <a href="{{prevPage}}">{{prevPageTitle}}</a>
             </div>
+            <div class="large-6 columns">
+                <ul class="inline-list right">
+                    <li>
+                        <a href="{{nextPage}}">{{nextPageTitle}}</a>
+                    </li>
+                </ul>
+            </div>
+            <hr/>
+        </div>
+        <footer class="row">
+            <div class="large-12 columns"></div>
         </footer>
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>

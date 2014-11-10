@@ -40,6 +40,10 @@ module.exports.getDraftFiles = function(data) {
                 publishFile: null,
                 publishPath: null,
                 title: null,
+                nextPage: null,
+                nextPageTitle: null,
+                prevPage: null,
+                prevPageTitle: null,
                 author: null,
                 createDate: null,
                 updateDate: null,
@@ -48,7 +52,8 @@ module.exports.getDraftFiles = function(data) {
                 images: []
             });
 
-            getMetadata(files[i]);
+            console.log('mmmm ' + i);
+            getMetadata(files[files.length - 1]);
         }
     }
     return files;
@@ -70,6 +75,10 @@ module.exports.createPost = function(fileInfo) {
                 title: article.title,
                 author: article.author,
                 date: article.date,
+                nextPage: fileInfo.nextPage,
+                nextPageTitle: fileInfo.nextPageTitle,
+                prevPage: fileInfo.prevPage,
+                prevPageTitle: fileInfo.prevPageTitle,
                 content: markdown.toHTML(article.content)
             });
 
@@ -144,19 +153,30 @@ var getMetadata = function(fileInfo) {
 
     var article = frontMatter.loadFront(path.join(fileInfo.draftPath, fileInfo.draftFile), 'content');
 
+    console.log(article.next);
+
     if (article.title === undefined) {
         fileInfo.process = false;
         fileInfo.rejectReason = "Title not present";
     }
     else {
         fileInfo.title = article.title;
-        fileInfo.publishFile = article.title.replace(/\s+/g, '-') + ".html";
+        fileInfo.publishFile = article.title.replace(/\s+/g, '-').toLowerCase() + ".html";
         fileInfo.publishPath = publishFolder;
-
+        if (article.next !== undefined) {
+            fileInfo.nextPageTitle = article.next;
+            fileInfo.nextPage = article.next.replace(/\s+/g, '-').toLowerCase() + ".html";
+        }
+        if (article.previous !== undefined) {
+            fileInfo.prevPageTitle = article.previous;
+            fileInfo.prevPage = article.previous.replace(/\s+/g, '-').toLowerCase() + ".html";
+        }
+        /*        
         if (fs.existsSync(path.join(fileInfo.publishPath, fileInfo.publishFile))) {
             fileInfo.process = false;
             fileInfo.rejectReason = "Published content with same name exists";
         }
+*/
     }
 
     fileInfo.author = article.author;
