@@ -20,7 +20,7 @@
                 /* makes panels the entire window height */
             }
             .blue {
-                display: flex;
+/*                display: flex; */
                 justify-content: center;
                 align-items: center;
             }
