@@ -33,3 +33,7 @@
             .orange {
                 background-color: #ea6300;
             }
+            .downarrow:after {
+                content:'\21A1';
+                font-size: 30px;
+            }
