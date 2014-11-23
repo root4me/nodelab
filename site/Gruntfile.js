@@ -10,9 +10,7 @@ module.exports = function(grunt) {
     var config = {
         app: 'app',
         dist: 'dist',
-        srcjs: ['../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js', 
-        '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js',
-        '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
+        srcjs: ['../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js', '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
         srccss: ['../bower_components/foundation/css/foundation.css', 'css/scroll.css'],
         srcimg: ['img/*.*'],
     };
@@ -91,8 +89,25 @@ module.exports = function(grunt) {
                 }]
             }
         },
+
+        htmlmin: { 
+            dist: { 
+                options: { 
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: '**/*.html',
+                    dest: '<%= config.dist %>',
+                }]
+            },
+
+        },
+
     });
 
-    grunt.registerTask('default', ['clean', 'copy:dist', 'processhtml', 'cssmin', 'uglify']);
+    grunt.registerTask('default', ['clean', 'copy:dist', 'processhtml', 'cssmin', 'uglify', 'htmlmin' ]);
 
 };
