@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        />
+        <title></title>
+        <style>
+
+#bg { position: fixed; top: 0; left: 0; }
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
+        </style>
+    </head>
+    
+    <body>
+    
+    <div>
+  <img src="img/header1.png" alt="" id="bg">
+</div>
+        <!-- build:js js/jquery.min.js -->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <!-- /build -->
+        <script>
+$(window).load(function() {    
+
+	var theWindow        = $(window),
+	    $bg              = $("#bg"),
+	    aspectRatio      = $bg.width() / $bg.height();
+	    			    		
+	function resizeBg() {
+		
+		if ( (theWindow.width() / theWindow.height()) < aspectRatio ) {
+		    $bg
+		    	.removeClass()
+		    	.addClass('bgheight');
+		} else {
+		    $bg
+		    	.removeClass()
+		    	.addClass('bgwidth');
+		}
+					
+	}
+	                   			
+	theWindow.resize(resizeBg).trigger("resize");
+
+});
+        </script>
+    </body>
+
+</html>
