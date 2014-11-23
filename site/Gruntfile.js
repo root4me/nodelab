@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js',
         '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
         srccss: ['../bower_components/foundation/css/foundation.css', 'css/scroll.css'],
-        srcimg: ['img/demo_tophat.png'],
+        srcimg: ['img/*.*'],
     };
 
     // Define the configuration for all the tasks
