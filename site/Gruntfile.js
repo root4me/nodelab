@@ -10,8 +10,8 @@ module.exports = function(grunt) {
     var config = {
         app: 'app',
         dist: 'dist',
-        srcjs: ['../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js', '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
-        srccss: ['../bower_components/foundation/css/foundation.css', 'css/scroll.css'],
+        srcjs: ['js/*.*','../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js', '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
+        srccss: ['css/*.*','../bower_components/foundation/css/foundation.css'],
         srcimg: ['img/*.*'],
     };
 
