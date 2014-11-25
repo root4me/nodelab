@@ -12,7 +12,7 @@ var draftFolder = 'draft',
     postTemplate = 'post.html',
     draftArchive = "draftArchive";
 
-    /*
+/*
         fileInfo.draftFile = 
         fileInfo.draftPath =
         fileInfo.publishFile =

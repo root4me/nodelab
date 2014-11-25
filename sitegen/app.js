@@ -29,8 +29,10 @@ var findById = function(list,id){
 
 sortById(drafts);
 
-//console.log(findById(drafts,"2"));
+console.log(drafts);
 
+/*
 drafts.forEach(function(draft) {
     fileman.createPost(draft);
 });
+*/
