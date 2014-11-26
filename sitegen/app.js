@@ -1,5 +1,17 @@
 var fileman = require('./fileman');
 
+var sitegen = require('./sitegen');
+
+
+console.log(sitegen.config);
+
+var payload = sitegen.drafts();
+sitegen.sort(payload);
+console.log(payload);
+
+//console.log(conf.drafts(conf.config));
+
+/*
 // Get the drafts
 var drafts = fileman.getDraftFiles('draft');
 
@@ -41,6 +53,7 @@ for (var i = 0; i < drafts.length; i++) {
     console.log(drafts[i]);
 }
 
+*/
 
 /*
 drafts.forEach(function(draft) {

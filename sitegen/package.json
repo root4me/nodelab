@@ -1,13 +1,13 @@
 {
-    "name": "sitegen",
-    "description": "generate static site",
-    "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "markdown": "latest",
-        "handlebars": "latest",
-        "yaml-front-matter": "latest",
-        "cheerio": "latest"
-        },
-    "author": "harish"
+  "name": "sitegen",
+  "description": "generate static site",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "handlebars": "^2.0.0",
+    "markdown": "^0.5.0",
+    "yaml-front-matter": "^3.0.1"
+  },
+  "author": "harish"
 }
