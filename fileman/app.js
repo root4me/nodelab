@@ -3,13 +3,16 @@ var f = require('./fileman');
 var list1 = [];
 var list2 = [];
 
+//f.generatesample('tmp/template.txt');
 
-f.readfile('tmp/sample.txt', function(a){
-    console.log('1 done');
+
+f.readfile('tmp/samplegen.txt', function(a){
+    console.log('1 done : ' + a.length);
     list1 = a;
     readdone(1);
     });
-    
+
+
 f.readfile('tmp/sampleout1.txt', function(a){
     console.log('2 done');
     list2 = a
@@ -42,7 +45,7 @@ var diffLists = function(list1,list2){
         }
         else
         {
-            console.log('not found : ' + list1[i]);
+          //  console.log('not found : ' + list1[i]);
             //not found
         }
     }
