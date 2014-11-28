@@ -1,17 +1,26 @@
-var conf = {
+var fs = require('fs'),
+    ll = require('line-by-line');
 
-}
-
-
-var fs = require('fs');
-var ll = require('line-by-line');
-
-module.exports.readfile = function(file, callback) {
-    var lr = new ll(file);
-    var list = [];
+// file to read
+// characters start to finish to read from row, user -1 as finish for while row
+// save to disk or no
+module.exports.readfile = function(file, start, finish, save, callback) {
+    var lr = new ll(file),
+        list = [];
+    //fs.unlinkSync('tmp/srcIds.txt');
+    var c = 0;
 
     lr.on('line', function(line) {
-        list.push(line.substring(0, 13).trim());
+        list.push(line.substring(start, finish).trim());
+
+        /*
+        if ((c++ % 2) === 0) {
+            fs.appendFileSync('tmp/srcIds1.txt', line.substring(start, finish).trim() + '\n');
+        }
+        
+        fs.appendFileSync('tmp/srcIds.txt', line.substring(start, finish).trim() + '\n');
+*/
+
     });
 
     lr.on('end', function() {
@@ -19,10 +28,19 @@ module.exports.readfile = function(file, callback) {
     });
 };
 
-module.exports.generatesample = function(file) {
-    var lr = new ll(file);
-    var ln = '';
-    var id = 1000000000000;
+module.exports.saveidlist = function(input, out, callback) {
+    var lr = new ll(input);
+    
+    fs.unlinkSync(out);
+    
+};
+
+// input template file and number of rows to generate
+// if there is a string '1000000000000', it will be replaced with incremental values indicating row Ids
+module.exports.generatesample = function(file, rows) {
+    var lr = new ll(file),
+        ln = '',
+        id = 1000000000000;
 
     lr.on('line', function(line) {
         if (line.trim().length !== 0) {
@@ -31,8 +49,9 @@ module.exports.generatesample = function(file) {
     });
 
     lr.on('end', function() {
+        fs.unlinkSync('tmp/samplegen.txt');
         console.time('Time to generate sample');
-        for (var i = 0; i < 100000; i++) {
+        for (var i = 0; i < rows; i++) {
             fs.appendFileSync('tmp/samplegen.txt', ln.replace('1000000000000', id++) + '\n');
         }
         console.timeEnd('Time to generate sample');
