@@ -5,14 +5,17 @@ var fs = require('fs'),
 // characters start to finish to read from row, user -1 as finish for while row
 // save to disk or no
 module.exports.readidlist = function(file, start, finish, save, callback) {
+    console.log('fetching Ids from : ' +  file);
+    console.time('Time to generate Id list from ' + file);
     var lr = new ll(file),
         list = [];
-
+    
     lr.on('line', function(line) {
         list.push(line.substring(start, finish).trim());
     });
 
     lr.on('end', function() {
+         console.timeEnd('Time to generate Id list from ' + file);
         callback(list);
     });
 };
@@ -37,6 +40,15 @@ module.exports.saveidlist = function(input, out) {
     });
 
 };
+
+//sort ascending
+module.exports.sort = function(list) {
+    list.sort(function(a, b) {
+        if (parseInt(a) > parseInt(b)) return 1;
+        if (parseInt(a) < parseInt(b)) return -1;
+        if (parseInt(a) == parseInt(b)) return 0;
+    });
+}
 
 // input template file and number of rows to generate
 // if there is a string '1000000000000', it will be replaced with incremental values indicating row Ids
