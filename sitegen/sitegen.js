@@ -31,9 +31,9 @@ module.exports.getmetadata = function(f) {
 
     d.name = f;
     d.id = path.basename(f, path.extname(f));
-    d.title = fmatter.title;
-    d.auhor = fmatter.author;
-    d.desc = fmatter.desc
+    //    d.title = fmatter.title;
+    //    d.auhor = fmatter.author;
+    //    d.desc = fmatter.desc
     d.mdate = fs.statSync(path.join(this.config.dfolder, f)).mtime; // get the modified date of the file
     d.cdate = fs.statSync(path.join(this.config.dfolder, f)).ctime; // get the create date of the file
 
@@ -63,6 +63,7 @@ module.exports.createpost = function(f, p, n) {
         pageBuilder = handlebars.compile(template),
         pageText = pageBuilder({
             title: fmatter.title,
+            desc: fmatter.desc,
             author: fmatter.author,
             date: fmatter.date,
             content: markdown.toHTML(fmatter.content),
