@@ -8,7 +8,7 @@ module.exports.config = {
     dfolder: 'draft', //draft folder
     tfolder: 'template', //template folder 
     ptemplate0: 'post.html', //basic post template
-    pfolder: 'publish'
+    pfolder: '../site/publish'
 };
 
 module.exports.drafts = function() {
@@ -16,7 +16,7 @@ module.exports.drafts = function() {
         list = [];
 
     for (var i = 0; i < files.length; i++) {
-        if (fs.statSync(path.join(this.config.dfolder, files[i])).isFile()) {
+        if (fs.statSync(path.resolve(this.config.dfolder, files[i])).isFile()) {
             list.push(this.getmetadata(files[i]));
         }
     }
@@ -27,15 +27,15 @@ module.exports.drafts = function() {
 // Input a file name from the draft folder and get back metadata
 module.exports.getmetadata = function(f) {
     var d = {},
-    fmatter = frontMatter.loadFront(path.join(this.config.dfolder, f), 'content');
+    fmatter = frontMatter.loadFront(path.resolve(this.config.dfolder, f), 'content');
 
     d.name = f;
     d.id = path.basename(f, path.extname(f));
     //    d.title = fmatter.title;
     //    d.auhor = fmatter.author;
     //    d.desc = fmatter.desc
-    d.mdate = fs.statSync(path.join(this.config.dfolder, f)).mtime; // get the modified date of the file
-    d.cdate = fs.statSync(path.join(this.config.dfolder, f)).ctime; // get the create date of the file
+    d.mdate = fs.statSync(path.resolve(this.config.dfolder, f)).mtime; // get the modified date of the file
+    d.cdate = fs.statSync(path.resolve(this.config.dfolder, f)).ctime; // get the create date of the file
 
     return d;
 }
@@ -50,16 +50,16 @@ module.exports.sort = function(list) {
 }
 
 //create post
-module.exports.createpost = function(f, p, n) {
+module.exports.generatepost = function(f, p, n) {
 
-    var template = fs.readFileSync(path.join(this.config.tfolder, this.config.ptemplate0), 'utf8'),
-        fmatter = frontMatter.loadFront(path.join(this.config.dfolder, f.name), 'content');
+    var template = fs.readFileSync(path.resolve(this.config.tfolder, this.config.ptemplate0), 'utf8'),
+        fmatter = frontMatter.loadFront(path.resolve(this.config.dfolder, f.name), 'content');
 
-    var pfmatter = p !== null ? frontMatter.loadFront(path.join(this.config.dfolder, p.name), 'content') : null;
-    var nfmatter = n !== null ? frontMatter.loadFront(path.join(this.config.dfolder, n.name), 'content') : null;
+    var pfmatter = p !== null ? frontMatter.loadFront(path.resolve(this.config.dfolder, p.name), 'content') : null;
+    var nfmatter = n !== null ? frontMatter.loadFront(path.resolve(this.config.dfolder, n.name), 'content') : null;
 
 
-    var publishFileName = path.join(this.config.pfolder, fmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html"),
+    var publishFileName = path.resolve(this.config.pfolder, fmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html"),
         pageBuilder = handlebars.compile(template),
         pageText = pageBuilder({
             title: fmatter.title,
@@ -76,4 +76,21 @@ module.exports.createpost = function(f, p, n) {
     fs.writeFileSync(publishFileName, pageText, "utf8");
 
     //            console.log(publishFileName);
+}
+
+// Need to have a better way to only copy used images. But for now, just copying everything from drafts to publish
+module.exports.copyimgs = function() {
+
+    if (!(fs.existsSync(path.resolve(this.config.pfolder, 'img')))) {
+        fs.mkdirSync(path.resolve(this.config.pfolder, 'img'));
+    }
+
+    var files = fs.readdirSync(this.config.dfolder + '/img');
+
+    for (var i = 0; i < files.length; i++) {
+        if (fs.statSync(path.resolve(this.config.dfolder + '/img', files[i])).isFile()) {
+            fs.createReadStream(path.resolve(this.config.dfolder + '/img',files[i])).pipe(fs.createWriteStream(path.resolve(this.config.pfolder + '/img',files[i])));
+        }
+    }
+
 }
