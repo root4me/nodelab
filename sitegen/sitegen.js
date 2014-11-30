@@ -12,11 +12,15 @@ module.exports.config = {
 };
 
 module.exports.drafts = function() {
-    var list = fs.readdirSync(this.config.dfolder);
+    var files = fs.readdirSync(this.config.dfolder),
+        list = [];
 
-    for (var i = 0; i < list.length; i++) {
-        list[i] = this.getmetadata(list[i]);
+    for (var i = 0; i < files.length; i++) {
+        if (fs.statSync(path.join(this.config.dfolder, files[i])).isFile()) {
+            list.push(this.getmetadata(files[i]));
+        }
     }
+
     return list;
 }
 
@@ -66,7 +70,7 @@ module.exports.createpost = function(f, p, n) {
             prevPage: pfmatter !== null ? pfmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html" : '',
             nextPageTitle: nfmatter !== null ? nfmatter.title : '',
             nextPage: nfmatter !== null ? nfmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html" : ''
-    });
+        });
 
     fs.writeFileSync(publishFileName, pageText, "utf8");
 
