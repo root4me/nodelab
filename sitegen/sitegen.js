@@ -8,7 +8,7 @@ module.exports.config = {
     dfolder: 'draft', //draft folder
     tfolder: 'template', //template folder 
     ptemplate0: 'post.html', //basic post template
-    pfolder: '../site/publish'
+    pfolder: 'publish'
 };
 
 module.exports.drafts = function() {
@@ -31,9 +31,6 @@ module.exports.getmetadata = function(f) {
 
     d.name = f;
     d.id = path.basename(f, path.extname(f));
-    //    d.title = fmatter.title;
-    //    d.auhor = fmatter.author;
-    //    d.desc = fmatter.desc
     d.mdate = fs.statSync(path.resolve(this.config.dfolder, f)).mtime; // get the modified date of the file
     d.cdate = fs.statSync(path.resolve(this.config.dfolder, f)).ctime; // get the create date of the file
 
@@ -51,6 +48,10 @@ module.exports.sort = function(list) {
 
 //create post
 module.exports.generatepost = function(f, p, n) {
+
+    if (!(fs.existsSync(path.resolve(this.config.pfolder)))) {
+        fs.mkdirSync(path.resolve(this.config.pfolder));
+    }
 
     var template = fs.readFileSync(path.resolve(this.config.tfolder, this.config.ptemplate0), 'utf8'),
         fmatter = frontMatter.loadFront(path.resolve(this.config.dfolder, f.name), 'content');
@@ -85,12 +86,13 @@ module.exports.copyimgs = function() {
         fs.mkdirSync(path.resolve(this.config.pfolder, 'img'));
     }
 
-    var files = fs.readdirSync(this.config.dfolder + '/img');
+    if (fs.existsSync(this.config.dfolder + '/img')) {
+        var files = fs.readdirSync(this.config.dfolder + '/img');
 
-    for (var i = 0; i < files.length; i++) {
-        if (fs.statSync(path.resolve(this.config.dfolder + '/img', files[i])).isFile()) {
-            fs.createReadStream(path.resolve(this.config.dfolder + '/img',files[i])).pipe(fs.createWriteStream(path.resolve(this.config.pfolder + '/img',files[i])));
+        for (var i = 0; i < files.length; i++) {
+            if (fs.statSync(path.resolve(this.config.dfolder + '/img', files[i])).isFile()) {
+                fs.createReadStream(path.resolve(this.config.dfolder + '/img', files[i])).pipe(fs.createWriteStream(path.resolve(this.config.pfolder + '/img', files[i])));
+            }
         }
     }
-
 }
