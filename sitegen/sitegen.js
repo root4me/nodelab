@@ -46,6 +46,7 @@ module.exports.sort = function(list) {
     });
 }
 
+
 //create post
 module.exports.generatepost = function(f, p, n) {
 
@@ -56,9 +57,31 @@ module.exports.generatepost = function(f, p, n) {
     var template = fs.readFileSync(path.resolve(this.config.tfolder, this.config.ptemplate0), 'utf8'),
         fmatter = frontMatter.loadFront(path.resolve(this.config.dfolder, f.name), 'content');
 
-    var pfmatter = p !== null ? frontMatter.loadFront(path.resolve(this.config.dfolder, p.name), 'content') : null;
-    var nfmatter = n !== null ? frontMatter.loadFront(path.resolve(this.config.dfolder, n.name), 'content') : null;
+    // index.md is a special case to generate the home screen. No need to process it like rest of the files.
+    if (f.name == "index.md") {
 
+        //row += ']}';
+        var pt,
+            pb = handlebars.compile(fs.readFileSync(path.resolve(this.config.tfolder, "indexpages.html"), 'utf8'));
+        
+        for (var i = 0; i < fmatter.rows.length; i++) {
+
+            pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + 
+            '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + 
+            ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
+
+            fs.writeFileSync(path.resolve(this.config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
+        }
+            
+        //copy over the index page to output
+        fs.createReadStream(path.resolve(this.config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(this.config.pfolder + '/index.html')));
+
+        return;
+    }
+
+    // If the next or previous file in the list does not have a numeric file name, do not link to them
+    var pfmatter = (p !== null && !(isNaN(parseFloat(f.id))) && !(isNaN(parseFloat(p.id)))) ? frontMatter.loadFront(path.resolve(this.config.dfolder, p.name), 'content') : null;
+    var nfmatter = (n !== null && !(isNaN(parseFloat(f.id))) && !(isNaN(parseFloat(n.id)))) ? frontMatter.loadFront(path.resolve(this.config.dfolder, n.name), 'content') : null;
 
     var publishFileName = path.resolve(this.config.pfolder, fmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html"),
         pageBuilder = handlebars.compile(template),
