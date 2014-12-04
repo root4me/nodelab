@@ -11,7 +11,7 @@
 			"img": "http://img.youtube.com/vi/1B4ZqaQ8XLI/0.jpg",
 			"desc": "Search for fall color #3 (youtube video)",
 			"href": "http://youtu.be/1B4ZqaQ8XLI",
-			"ext": false
+			"ext": true
 		}]
 	},
 	{
@@ -31,3 +31,7 @@
 }
 ---
 
+Generate a list of index pages  (index1.html - indexn.html) based on the JSON shown in header section. 
+/templates/indexpages.html defines the layout of the pages. Intend of generating these pages is to load these into a home / landing page as featured content that users can navigate to right from the landing page.
+
+ext : true denotes that the link is to external content and it need to be opened in a new tab.

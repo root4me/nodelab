@@ -14,4 +14,4 @@ for (var i = 0; i < payload.length; i++) {
 sitegen.copyimgs();
 */
 
-sitegen.rebuildall({dfolder:'draft',pfolder:'publish'});
+sitegen.rebuildall();

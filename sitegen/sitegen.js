@@ -7,19 +7,18 @@ var fs = require('fs'),
 module.exports.config = {
     dfolder: 'draft', //draft folder
     tfolder: 'template', //template folder 
-    ptemplate0: 'post.html', //basic post template
+    ptemplate: 'post.html', //basic post template
     pfolder: 'publish'
 };
 
 module.exports.rebuildall = function(o) {
-    
-    if (o !== null)
-    {
-        this.config.dfolder = o.dfolder !== undefined ? o.dfolder : this.config.dfolder; 
-        this.config.tfolder = o.tfolder !== undefined ? o.tfolder : this.config.tfolder; 
-        this.config.pfolder = o.pfolder !== undefined ? o.pfolder : this.config.pfolder; 
+
+    if (o !== undefined) {
+        this.config.dfolder = o.dfolder !== undefined ? o.dfolder : this.config.dfolder;
+        this.config.tfolder = o.tfolder !== undefined ? o.tfolder : this.config.tfolder;
+        this.config.pfolder = o.pfolder !== undefined ? o.pfolder : this.config.pfolder;
     }
-     
+
     console.log('source folder : ' + this.config.dfolder);
     console.log('publish folder : ' + this.config.pfolder);
 
@@ -29,7 +28,7 @@ module.exports.rebuildall = function(o) {
         this.generatepost(drafts[i], i == drafts.length - 1 ? null : drafts[i + 1], i > 0 ? drafts[i - 1] : null);
     }
     this.copyimgs();
-    
+
     console.log('done generating site...');
 }
 
@@ -76,7 +75,7 @@ module.exports.generatepost = function(f, p, n) {
         fs.mkdirSync(path.resolve(this.config.pfolder));
     }
 
-    var template = fs.readFileSync(path.resolve(this.config.tfolder, this.config.ptemplate0), 'utf8'),
+    var template = fs.readFileSync(path.resolve(this.config.tfolder, this.config.ptemplate), 'utf8'),
         fmatter = frontMatter.loadFront(path.resolve(this.config.dfolder, f.name), 'content');
 
     // index.md is a special case to generate the home screen. No need to process it like rest of the files.
@@ -119,7 +118,7 @@ module.exports.generatepost = function(f, p, n) {
 
     fs.writeFileSync(publishFileName, pageText, "utf8");
 
-    //            console.log(publishFileName);
+    // console.log(publishFileName);
 }
 
 // Need to have a better way to only copy used images. But for now, just copying everything from drafts to publish
