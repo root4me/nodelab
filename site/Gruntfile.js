@@ -108,6 +108,22 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('default', ['clean', 'copy:dist', 'processhtml', 'cssmin', 'uglify', 'htmlmin' ]);
+    grunt.registerTask('default', ['gen','clean', 'copy:dist', 'processhtml', 'cssmin', 'uglify', 'htmlmin' ]);
+    
+    grunt.registerTask('gen', 'Generate site from templates', function() {
+        var sitegen = require('sitegen');
+        var payload = sitegen.drafts();
+        
+        console.log(sitegen.config);
+        
+        sitegen.sort(payload);
+        for (var i = 0; i < payload.length; i++) {
+            sitegen.generatepost(payload[i], i == payload.length - 1 ? null : payload[i + 1], i > 0 ? payload[i - 1] : null);
+        }
+
+        sitegen.copyimgs();
+        
+        //sitegen.rebuildall();
+    });
 
 };

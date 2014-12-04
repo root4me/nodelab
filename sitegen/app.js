@@ -1,6 +1,6 @@
 var sitegen = require('./sitegen');
-var path = require('path');
 
+/*
 console.log(sitegen.config);
 
 var payload = sitegen.drafts();
@@ -12,3 +12,6 @@ for (var i = 0; i < payload.length; i++) {
 }
 
 sitegen.copyimgs();
+*/
+
+sitegen.rebuildall({dfolder:'draft',pfolder:'publish'});

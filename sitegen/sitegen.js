@@ -11,6 +11,28 @@ module.exports.config = {
     pfolder: 'publish'
 };
 
+module.exports.rebuildall = function(o) {
+    
+    if (o !== null)
+    {
+        this.config.dfolder = o.dfolder !== undefined ? o.dfolder : this.config.dfolder; 
+        this.config.tfolder = o.tfolder !== undefined ? o.tfolder : this.config.tfolder; 
+        this.config.pfolder = o.pfolder !== undefined ? o.pfolder : this.config.pfolder; 
+    }
+     
+    console.log('source folder : ' + this.config.dfolder);
+    console.log('publish folder : ' + this.config.pfolder);
+
+    var drafts = this.drafts();
+    this.sort(drafts);
+    for (var i = 0; i < drafts.length; i++) {
+        this.generatepost(drafts[i], i == drafts.length - 1 ? null : drafts[i + 1], i > 0 ? drafts[i - 1] : null);
+    }
+    this.copyimgs();
+    
+    console.log('done generating site...');
+}
+
 module.exports.drafts = function() {
     var files = fs.readdirSync(this.config.dfolder),
         list = [];
@@ -62,17 +84,15 @@ module.exports.generatepost = function(f, p, n) {
 
         //row += ']}';
         var pt,
-            pb = handlebars.compile(fs.readFileSync(path.resolve(this.config.tfolder, "indexpages.html"), 'utf8'));
-        
+        pb = handlebars.compile(fs.readFileSync(path.resolve(this.config.tfolder, "indexpages.html"), 'utf8'));
+
         for (var i = 0; i < fmatter.rows.length; i++) {
 
-            pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + 
-            '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + 
-            ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
+            pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
 
             fs.writeFileSync(path.resolve(this.config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
         }
-            
+
         //copy over the index page to output
         fs.createReadStream(path.resolve(this.config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(this.config.pfolder + '/index.html')));
 
