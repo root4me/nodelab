@@ -1,7 +1,7 @@
 {
   "name": "sitegen",
   "description": "generate static site",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "handlebars": "^2.0.0",
