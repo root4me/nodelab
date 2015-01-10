@@ -44,6 +44,17 @@ module.exports = function(grunt) {
         },
 
         copy: {
+            
+            template: {
+                files: [{
+                    expand: true,
+                    cwd: 'template',
+                    src: 'index.html',
+                    dest: '<%= config.app %>',
+
+                }]
+            },
+            
             dist: {
                 files: [{
                     expand: true,
@@ -108,7 +119,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('default', ['gen','clean', 'copy:dist', 'processhtml', 'cssmin', 'uglify', 'htmlmin' ]);
+    grunt.registerTask('default', ['gen', 'clean', 'copy:template' , 'copy:dist', 'processhtml', 'cssmin', 'uglify', 'htmlmin' ]);
     
     grunt.registerTask('gen', 'Generate site from templates', function() {
         var sitegen = require('sitegen');
