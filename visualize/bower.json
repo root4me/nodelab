@@ -1,0 +1,20 @@
+{
+  "name": "hellod3",
+  "version": "0.0.0",
+  "homepage": "https://github.com/root4me/nodelab",
+  "authors": [
+    "root4me"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "c3": "~0.4.10"
+  }
+}

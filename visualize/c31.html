@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="bower_components/c3/c3.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="bower_components/d3/d3.js"></script>
+       <script type="text/javascript" src="bower_components/c3/c3.js"></script> 
+</head>
+
+<body>
+    <div id="chart"></div>
+    
+    <script>
+
+
+
+    chart = c3.generate({
+        data: {
+            json: [
+                {date: '2015-1-1', transaction1: 100, transaction2: 0},
+                {date: '2015-2-1', transaction1: 150, transaction2: 10},
+                {date: '2015-3-1', transaction1: 160, transaction2: 20},
+                {date: '2015-4-1', transaction1: 180, transaction2: 25},
+            ],
+            keys: {
+                x: 'date', 
+                value: ['transaction1', 'transaction2'],
+            }
+        },
+        axis: {
+         x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%b'
+                    }
+                }
+        }
+    });
+
+
+
+</script>
+</body>
