@@ -55,7 +55,16 @@
 			"href": "http://youtu.be/BvoDOVlbpcA",
 			"ext": true
 		}]
+	},
+	{
+		"columns": [{
+			"img": "http://img.youtube.com/vi/q0MdEfyXUIQ/0.jpg",
+			"desc": "And there was snow ... (youtube video)",
+			"href": "http://youtu.be/q0MdEfyXUIQ",
+			"ext": true
+		}]
 	}]
 }
 ---
+
 
