@@ -19,7 +19,7 @@ var scan = function(dir) {
             //console.log(p);
             // find the file type using mmmagic
             getfiletype(p, function(file, mime) {
-                if (mime.indexOf('audio') > -1 || mime.indexOf('video') > -1) {
+                if (mime.indexOf('audio') > -1 || mime.indexOf('video') > -1 || mime.indexOf('image') > -1) {
                     console.log(file + " -> " + mime);
                 }
             })
