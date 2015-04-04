@@ -1,0 +1,17 @@
+{
+  "name": "mediascan",
+  "version": "0.0.1",
+  "description": "scan for media (image, audio , video)",
+  "main": "mediascan.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "root4me"
+  },
+  "author": "root4me",
+  "dependencies": {
+    "mmmagic": "^0.3.13"
+  }
+}
