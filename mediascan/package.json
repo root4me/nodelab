@@ -12,6 +12,7 @@
   },
   "author": "root4me",
   "dependencies": {
+    "fluent-ffmpeg": "^2.0.0-rc3",
     "mmmagic": "^0.3.13"
   }
 }
