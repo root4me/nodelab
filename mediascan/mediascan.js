@@ -6,15 +6,27 @@ var f = 0; // number of files processed
 var d = 0; // number of directories processed (including the root directory passed in as commandline parameter)
 var ta = 0; // used to keep track of total assets processed (sub dir + files)
 var mf = 0; // media found
-var ad = 0;
-var im = 0;
-var vd = 0;
-var pad = 0; // potentially audio
+var ad = 0; // audio found
+var im = 0; // image found
+var vd = 0; // video found
 
-var mime = require('mime-sniffer');
+var saveresult = false;
+var outfile = 'mediascan.out.txt';
+
+console.log('USAGE -> node mediascan ~/Downloads/Test [-save]');
+
+if (process.argv[2] == undefined) process.exit();
+
+if (process.argv[3] != undefined) {
+    if (process.argv[3].indexOf('-s') > -1) {
+        saveresult = true;
+        if (fs.existsSync(outfile)) fs.unlinkSync(outfile);
+    }
+}
+
 
 // Recursively read contents of the directory
-var scan = function(dir, callback) {
+var scan = function(dir, saveresults, callback) {
 
     d++;
     if (!fs.existsSync(dir)) {
@@ -35,20 +47,29 @@ var scan = function(dir, callback) {
                 getfiletype(p, function(file, mime) {
                     f++;
                     if (mime != undefined) {
-                        if (mime.indexOf('audio') == 0 || mime.indexOf('video') == 0 || mime.indexOf('image') == 0 || mime.indexOf('application/octet-stream; charset=binary') ==0) {
+                        if (mime.indexOf('audio') == 0 || mime.indexOf('video') == 0 || mime.indexOf('image') == 0 || mime.indexOf('application/octet-stream; charset=binary') == 0) {
                             console.log(file + " -> " + mime);
                             mf++;
-                            if (mime.indexOf('audio') == 0) ad++;
-                            if (mime.indexOf('video') == 0) vd++;
-                            if (mime.indexOf('image') == 0) im++;
-                            if (mime.indexOf('application/octet-stream; charset=binary') == 0) pad++; // This seem to happen for mp3 with album art embeded
+                            if (mime.indexOf('audio') == 0) {
+                                ad++;
+                                if (saveresults) fs.appendFileSync(outfile, 'audio,' + file + '\n');
+                            }
+                            else if (mime.indexOf('video') == 0) {
+                                vd++;
+                                if (saveresults) fs.appendFileSync(outfile, 'video,' + file + '\n');
+                            }
+                            else if (mime.indexOf('image') == 0) {
+                                im++;
+                                if (saveresults) fs.appendFileSync(outfile, 'image,' + file + '\n');
+                            }
+
                         }
                     }
                     callback(null, file);
                 })
             }
             else if (fs.statSync(p).isDirectory()) {
-                scan(p, callback);
+                scan(p, saveresults, callback);
             }
             else {
                 console.log("not a file and not a directory .. wtf !")
@@ -56,7 +77,7 @@ var scan = function(dir, callback) {
         }
         catch (e) {
             console.log(e);
-            // need to reduce on from total assets since this exception would have failes processing of one file or directory
+            // need to reduce one from total assets since this exception would have failes processing of one file or directory
             // so far only time i have seen this happen is when statSync is called on a circular symbolic link
             // ELOOP, too many symbolic links encountered 
 
@@ -74,21 +95,37 @@ var getfiletype = function(file, callback) {
     magic.detectFile(file, function(err, mime) {
         if (err) {
             console.log(file + " -> " + err);
+            callback(file, mime);
         }
-        //console.log(file + " -> " + mime);
-        callback(file, mime);
+
+        else {
+            // Work around for problem detecting some MP3 file . When MP3 has album art embedded in it; mime type is returning as 'application/octet-stream; charset=binary'
+            // Running file --mime [file name] gives the same result
+            // Runnig file [file name] come back with 'Audio file with ID3 xxxxxxx'
+            // So, using that as a fall back mechanism to detect MP3 and setting the mime to 'audio/mpeg; charset=binary'
+            if (mime.indexOf('application/octet-stream; charset=binary') == 0) {
+                new Magic().detectFile(file, function(err, mime) {
+                    if (mime.toLowerCase().indexOf('audio') > -1) {
+                        mime = 'audio/mpeg; charset=binary';
+                    }
+                    callback(file, mime);
+                });
+            }
+            else {
+                callback(file, mime);
+            }
+        }
     });
 }
 
 
-scan(process.argv[2], function(data) {
+scan(process.argv[2], saveresult, function(data) {
     //console.log('i=' + it + ' - ' + 'j=' + j + ' - rc=' + rc);
 
     if (ta == (f + (d - 1))) {
         console.log('dir count -> ' + (d - 1));
         console.log('files count -> ' + f);
         console.log('audio files -> ' + ad);
-        console.log('maybe audio -> ' + pad);
         console.log('video files -> ' + vd);
         console.log('image files -> ' + im);
         console.log('Total media -> ' + mf);
