@@ -9,6 +9,9 @@ var mf = 0; // media found
 var ad = 0;
 var im = 0;
 var vd = 0;
+var pad = 0; // potentially audio
+
+var mime = require('mime-sniffer');
 
 // Recursively read contents of the directory
 var scan = function(dir, callback) {
@@ -32,13 +35,13 @@ var scan = function(dir, callback) {
                 getfiletype(p, function(file, mime) {
                     f++;
                     if (mime != undefined) {
-                        if (mime.indexOf('audio') == 0 || mime.indexOf('video') == 0 || mime.indexOf('image') == 0) {
+                        if (mime.indexOf('audio') == 0 || mime.indexOf('video') == 0 || mime.indexOf('image') == 0 || mime.indexOf('application/octet-stream; charset=binary') ==0) {
                             console.log(file + " -> " + mime);
                             mf++;
                             if (mime.indexOf('audio') == 0) ad++;
                             if (mime.indexOf('video') == 0) vd++;
                             if (mime.indexOf('image') == 0) im++;
-
+                            if (mime.indexOf('application/octet-stream; charset=binary') == 0) pad++; // This seem to happen for mp3 with album art embeded
                         }
                     }
                     callback(null, file);
@@ -72,6 +75,7 @@ var getfiletype = function(file, callback) {
         if (err) {
             console.log(file + " -> " + err);
         }
+        //console.log(file + " -> " + mime);
         callback(file, mime);
     });
 }
@@ -84,6 +88,7 @@ scan(process.argv[2], function(data) {
         console.log('dir count -> ' + (d - 1));
         console.log('files count -> ' + f);
         console.log('audio files -> ' + ad);
+        console.log('maybe audio -> ' + pad);
         console.log('video files -> ' + vd);
         console.log('image files -> ' + im);
         console.log('Total media -> ' + mf);

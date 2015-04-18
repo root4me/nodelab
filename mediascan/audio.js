@@ -25,9 +25,9 @@ var readline = require('readline'),
         output: process.stdout,
     });
 
-rl.setPrompt('>', 2);
+rl.setPrompt('>', 1);
 rl.prompt();
-            
+
 var play = function(file, from, to) {
 
     ffmpeg(file)
@@ -59,11 +59,34 @@ var displaymetadata = function(file) {
         })
 }
 
+var updatemetadata = function(file, metadata) {
+    ffmpeg(file)
+        .output(file)
+        .outputOptions(['-metadata', 'title=m.e'])
+        .on('end', function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            //console.log(data);
+            rl.prompt();
+        })
+        .run();
+
+}
+
 rl.on('line', function(input) {
     if (input.trim() == 'play') play('samples/mumbai.effect.mp3', 0, 10);
     if (input.trim() == 'display') displaymetadata('samples/mumbai.effect.mp3');
+    if (input.trim().indexOf('update') == 0) {
+        var tokens = input.split(' ');
+        
+        updatemetadata('samples/mumbai.effect.mp3', tokens[1]);
+    };
     if (input.trim() == 'help') console.log('commands -> play display exit');
-    if (input.trim() == 'exit') { rl.close(); return; };
+    if (input.trim() == 'exit') {
+        rl.close();
+        return;
+    };
     rl.prompt();
 
 
