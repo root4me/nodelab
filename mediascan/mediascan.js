@@ -52,15 +52,15 @@ var scan = function(dir, saveresults, callback) {
                             mf++;
                             if (mime.indexOf('audio') == 0) {
                                 ad++;
-                                if (saveresults) fs.appendFileSync(outfile, 'audio,' + file + '\n');
+                                if (saveresults) fs.appendFileSync(outfile, 'audio:' + file + '\n');
                             }
                             else if (mime.indexOf('video') == 0) {
                                 vd++;
-                                if (saveresults) fs.appendFileSync(outfile, 'video,' + file + '\n');
+                                if (saveresults) fs.appendFileSync(outfile, 'video:' + file + '\n');
                             }
                             else if (mime.indexOf('image') == 0) {
                                 im++;
-                                if (saveresults) fs.appendFileSync(outfile, 'image,' + file + '\n');
+                                if (saveresults) fs.appendFileSync(outfile, 'image:' + file + '\n');
                             }
 
                         }

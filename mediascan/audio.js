@@ -1,4 +1,6 @@
 var ffmpeg = require('fluent-ffmpeg');
+var fs = require('fs');
+var path = require('path');
 
 // Add/update metadata to audio file
 // ffmpeg -i samples/Mumbai_Effect.mp3 -metadata title="mumbai.effect"  samples/mumbai.effect.mp3 -y
@@ -52,35 +54,51 @@ var play = function(file, from, to) {
 }
 
 var displaymetadata = function(file) {
-    ffmpeg(file)
-        .ffprobe(function(err, data) {
-            console.log(data);
-            rl.prompt();
-        })
+    console.log(file);
+
+    var dc = fs.readdirSync('samples');
+    for (var i = 0; i < dc.length; i++) {
+        {
+            console.log(path.resolve('samples',dc[i]));
+            ffmpeg(path.resolve('samples',dc[i]))
+                .ffprobe(function(err, data) {
+                    console.log(data);
+                    rl.prompt();
+                })
+        }
+    }
 }
 
 var updatemetadata = function(file, metadata) {
-    ffmpeg(file)
+
+    var oldfile = file + '.old';
+    var newfile = file;
+
+    fs.renameSync(file, oldfile);
+
+    displaymetadata(oldfile);
+
+    ffmpeg(file + '.old')
         .output(file)
-        .outputOptions(['-metadata', 'title=m.e'])
+        .outputOptions(['-metadata', 'title=m.e', '-metadata', 'language=eng'])
         .on('end', function(err, data) {
             if (err) {
                 console.log(err);
             }
             //console.log(data);
+            displaymetadata(file);
             rl.prompt();
         })
         .run();
-
 }
 
 rl.on('line', function(input) {
     if (input.trim() == 'play') play('samples/mumbai.effect.mp3', 0, 10);
-    if (input.trim() == 'display') displaymetadata('samples/mumbai.effect.mp3');
+    if (input.trim() == 'display') displaymetadata('samples/Mumbai_Effect.mp3');
     if (input.trim().indexOf('update') == 0) {
         var tokens = input.split(' ');
-        
-        updatemetadata('samples/mumbai.effect.mp3', tokens[1]);
+
+        updatemetadata('samples/Mumbai_Effect.mp3', tokens[1]);
     };
     if (input.trim() == 'help') console.log('commands -> play display exit');
     if (input.trim() == 'exit') {

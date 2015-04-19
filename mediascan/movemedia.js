@@ -14,7 +14,7 @@ if (process.argv[2] == undefined) process.exit();
 outpath = process.argv[2];
 
 lr.on('line', function(line) {
-    movemedia(line.split(',')[0], line.split(',')[1]);
+    movemedia(line.split(':')[0], line.split(':')[1]);
 });
 
 lr.on('end', function() {
@@ -26,12 +26,10 @@ var movemedia = function(filetype, file) {
 
     console.log(path.resolve(outpath));
 
-    if (!(fs.existsSync(path.resolve(outpath)))) {
-        fs.mkdirSync(path.resolve(outpath));
-        fs.mkdirSync(path.resolve(outpath, 'audio'));
-        fs.mkdirSync(path.resolve(outpath, 'video'));
-        fs.mkdirSync(path.resolve(outpath, 'image'));
-    }
+    if (!(fs.existsSync(path.resolve(outpath)))) fs.mkdirSync(path.resolve(outpath));
+    if (!(fs.existsSync(path.resolve(outpath, 'audio')))) fs.mkdirSync(path.resolve(outpath, 'audio'));
+    if (!(fs.existsSync(path.resolve(outpath, 'video')))) fs.mkdirSync(path.resolve(outpath, 'video'));
+    if (!(fs.existsSync(path.resolve(outpath, 'image')))) fs.mkdirSync(path.resolve(outpath, 'image'));
 
 
     console.log('file -> ' + file);
