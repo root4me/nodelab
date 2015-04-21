@@ -1,6 +1,7 @@
 var ffmpeg = require('fluent-ffmpeg');
 var fs = require('fs');
 var path = require('path');
+var outfile = 'audioindex.txt';
 
 // Add/update metadata to audio file
 // ffmpeg -i samples/Mumbai_Effect.mp3 -metadata title="mumbai.effect"  samples/mumbai.effect.mp3 -y
@@ -54,18 +55,31 @@ var play = function(file, from, to) {
 }
 
 var displaymetadata = function(file) {
-    console.log(file);
+
 
     var dc = fs.readdirSync('samples');
     for (var i = 0; i < dc.length; i++) {
         {
-            console.log(path.resolve('samples',dc[i]));
-            ffmpeg(path.resolve('samples',dc[i]))
+            console.log(path.resolve('samples', dc[i]));
+            ffmpeg(path.resolve('samples', dc[i]))
                 .ffprobe(function(err, data) {
-                    console.log(data);
+                    console.log(data.format);
                     rl.prompt();
                 })
         }
+    }
+}
+
+var analyzeaudio = function(dir) {
+    var files = fs.readdirSync(dir);
+
+    for (var i = 0; i < files.length; i++) {
+
+        ffmpeg(path.resolve(dir, files[i]))
+            .ffprobe(function(err, data) {
+                fs.appendFileSync(outfile, JSON.stringify(data.format) + '\n');
+                console.log('file ->' + data.format.filename);
+            })
     }
 }
 
@@ -94,7 +108,7 @@ var updatemetadata = function(file, metadata) {
 
 rl.on('line', function(input) {
     if (input.trim() == 'play') play('samples/mumbai.effect.mp3', 0, 10);
-    if (input.trim() == 'display') displaymetadata('samples/Mumbai_Effect.mp3');
+    if (input.trim() == 'display') analyzeaudio('/home/harish/media.old/audio');
     if (input.trim().indexOf('update') == 0) {
         var tokens = input.split(' ');
 
