@@ -28,6 +28,16 @@ var readline = require('readline'),
         output: process.stdout,
     });
 
+var meta = {
+    title: 'unknown',
+    genre: 'unknown',
+    album: 'unknown',
+    artist: 'unknown',
+    date: 'unknown',
+    language: 'unknown',
+    comment: 'none'
+};
+
 rl.setPrompt('>', 1);
 rl.prompt();
 
@@ -47,11 +57,52 @@ var play = function(file, from, to) {
                     play(file, to, parseInt(to) + parseInt(data));
                 }
                 else {
-                    displaymetadata(file);
+                    //displaymetadata(file);
+                    // display current metadata
+                    // edit if needed and save
+                    editmetadata(file);
                 }
             });
         })
         .run();
+}
+
+var editmetadata = function(file) {
+    ffmpeg(file)
+        .ffprobe(function(err, data) {
+
+            for (var key in data.format.tags) {
+
+                if (meta[key] != undefined) meta[key] = data.format.tags[key];
+            }
+
+            rl.write(JSON.stringify(meta))
+
+            rl.question('update-> ', function(data) {
+                var ma = [];
+                var em = JSON.parse(data);
+                
+                for (var i in em) {
+                    ma.push('-metadata');
+                    
+                    // hack to handle the way fluent ffmpeg handles oputput options custom parameters
+                    // review line 113 - 124 in fluent ffmpeg custom.js proto.outputOptions
+                    if (em[i].split(' ').length ==  2) em[i] = em[i] + ' '; 
+                    
+                    ma.push(i + '=' + em[i]);
+                }
+                
+                console.log(ma)
+
+                updatemetadata(file,ma);
+                
+                rl.prompt();
+
+            });
+
+            //console.log(metaarray);
+
+        })
 }
 
 var displaymetadata = function(file) {
@@ -90,24 +141,24 @@ var updatemetadata = function(file, metadata) {
 
     fs.renameSync(file, oldfile);
 
-    displaymetadata(oldfile);
+    //displaymetadata(oldfile);
 
     ffmpeg(file + '.old')
         .output(file)
-        .outputOptions(['-metadata', 'title=m.e', '-metadata', 'language=eng'])
+        .outputOptions(metadata)
         .on('end', function(err, data) {
             if (err) {
                 console.log(err);
             }
-            //console.log(data);
-            displaymetadata(file);
+            console.log(data);
+            //displaymetadata(file);
             rl.prompt();
         })
         .run();
 }
 
 rl.on('line', function(input) {
-    if (input.trim() == 'play') play('samples/mumbai.effect.mp3', 0, 10);
+    if (input.trim() == 'play') play('/home/harish/media.old/audio/Sugarray - Someday.mp3', 0, 1);
     if (input.trim() == 'display') analyzeaudio('/home/harish/media.old/audio');
     if (input.trim().indexOf('update') == 0) {
         var tokens = input.split(' ');
