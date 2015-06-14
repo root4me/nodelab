@@ -62,7 +62,13 @@
 			"desc": "And there was snow ... (youtube video)",
 			"href": "http://youtu.be/q0MdEfyXUIQ",
 			"ext": true
-		}]
+		},
+		{
+                        "img": "http://img.youtube.com/vi/6oJXtHJ7YHY/0.jpg",
+                        "desc": "arduio table top bot ... (youtube video)",
+                        "href": "https://youtu.be/6oJXtHJ7YHY",
+                        "ext": true
+                }]
 	}]
 }
 ---
