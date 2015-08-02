@@ -148,7 +148,10 @@ module.exports.rebuildall = function(o) {
     for (var i = 0; i < drafts.length; i++) {
         generatepost(drafts[i], i == drafts.length - 1 ? null : drafts[i + 1], i > 0 ? drafts[i - 1] : null);
     }
-    copyimgs();
+    
+    // When rebuildall is run from inside grunt file in /site , copy never seem to work
+    // It alway generates empty files inside the publish directory. So, commenting this out for now and instead handle copying images in grunt script itself
+    // copyimgs();
 
     console.log('done generating site...!');
 }

@@ -10,8 +10,8 @@ module.exports = function(grunt) {
     var config = {
         app: 'app',
         dist: 'dist',
-        srcjs: ['js/*.*','../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js', '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
-        srccss: ['css/*.*','../bower_components/foundation/css/foundation.css'],
+        srcjs: ['js/*.*', '../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js', '../bower_components/ScrollMagic/js/jquery.scrollmagic.js', '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/gsap/src/uncompressed/TweenMax.js', ],
+        srccss: ['css/*.*', '../bower_components/foundation/css/foundation.css'],
         srcimg: ['img/*.*'],
     };
 
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            
+
             template: {
                 files: [{
                     expand: true,
@@ -54,17 +54,25 @@ module.exports = function(grunt) {
 
                 }]
             },
-            
-            dist: {
+
+            srcimg: {
                 files: [{
-                    expand: true,
-                    cwd: '<%= config.app %>',
-                    src: '<%= config.srcimg %>',
-                    dest: '<%= config.dist %>',
+                        expand: true,
+                        cwd: 'draft',
+                        src: '<%= config.srcimg %>',
+                        dest: '<%= config.app %>',
 
-                }]
-                //console.log('test');
+                    }]
+            },
 
+            distimg: {
+                files: [{
+                        expand: true,
+                        cwd: '<%= config.app %>',
+                        src: '<%= config.srcimg %>',
+                        dest: '<%= config.dist %>',
+
+                    }]
             },
 
         },
@@ -101,9 +109,9 @@ module.exports = function(grunt) {
             }
         },
 
-        htmlmin: { 
-            dist: { 
-                options: { 
+        htmlmin: {
+            dist: {
+                options: {
                     removeComments: true,
                     collapseWhitespace: true
                 },
@@ -119,12 +127,14 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('default', ['gen', 'clean', 'copy:template' , 'copy:dist', 'processhtml', 'cssmin', 'uglify', 'htmlmin' ]);
-    
+    grunt.registerTask('default', ['gen', 'clean', 'copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+
     grunt.registerTask('gen', 'Generate site from templates', function() {
         var sitegen = require('sitegen');
-        
-        sitegen.rebuildall({pfolder:"app"});
+
+        sitegen.rebuildall({
+            pfolder: "app"
+        });
     });
 
 };
