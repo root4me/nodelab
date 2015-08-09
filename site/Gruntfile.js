@@ -26,7 +26,7 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     dot: true,
-                    src: ['.tmp', '<%= config.dist %>/*', '!<%= config.dist %>/.git*']
+                    src: ['.tmp', '<%= config.dist %>/*', '<%= config.app %>/*.html', '!<%= config.dist %>/.git*']
                 }]
             },
         },
@@ -127,7 +127,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('default', ['gen', 'clean', 'copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+    grunt.registerTask('default', ['clean', 'gen', 'copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
 
     grunt.registerTask('gen', 'Generate site from templates', function() {
         var sitegen = require('sitegen');
