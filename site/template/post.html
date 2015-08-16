@@ -1,74 +1,110 @@
 <!doctype html>
 <html class="no-js" lang="en">
-    
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"  />
-        <meta name="description" content="{{desc}}" />
 
-        <title>{{title}}</title>
-        <!-- build:css css/foundation.min.css -->
-        <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css" />
-        <!-- /build -->
-        <!-- build:css css/content.min.css -->
-        <link rel="stylesheet" href="css/content.css" />
-        <!-- /build -->
-        <!-- build:js js/modernizr.min.js -->
-        <script src="../bower_components/foundation/js/vendor/modernizr.js"></script>
-        <!-- /build -->
-        
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{desc}}" />
+
+    <title>{{title}}</title>
     
-    <body>
-        <div class="row">
-            <div class="large-12 columns">
-                <h1><a href="index.html">root4me</a></small>
-                </h1>
-                <hr/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns" role="content">
-                <article>
-                    <h3>
-                        <a href="#">{{title}}</a>
-                    </h3>
-                    <h6>Written by
-                        <a href="#">{{author}}</a>  on {{date}}
-                    </h6>
-                   <hr/>
-        
-                    {{{content}}}
-                            
-                </article>
-            </div>
-        </div>
-        <div class="row">
-            <hr/>
-            <div class="large-6 columns">
-                <a href="{{prevPage}}">{{prevPageTitle}}</a>
-            </div>
-            <div class="large-6 columns">
-                <ul class="inline-list right">
-                    <li>
-                        <a href="{{nextPage}}">{{nextPageTitle}}</a>
-                    </li>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+
+    <!-- build:css css/foundation.min.css -->
+    <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css" />
+    <!-- /build -->
+    <!-- build:css css/site.min.css -->
+    <link rel="stylesheet" href="css/site.css" />
+    <!-- /build -->
+    <!-- build:js js/modernizr.min.js -->
+    <script src="../bower_components/foundation/js/vendor/modernizr.js"></script>
+    <!-- /build -->
+
+</head>
+
+<body>
+
+    <!-- top nav -->
+    <div class="contain-to-grid sticky">
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="namelogo">
+                    <h1><a href="index.html">root4me</a></h1>
+                </li>
+                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right"> </ul>
+                <!-- Left Nav Section -->
+                <ul class="left">
+                    <li></li>
                 </ul>
-            </div>
-            <hr/>
+            </section>
+        </nav>
+    </div>
+    <!-- end top nav -->
+
+    <div class="row">
+        <div class="large-12 columns content" role="content">
+            <article class="post">
+                <img alt="person" class="author" src="img/about.jpg">
+                <h2>{{title}}</a></h2>
+                <p class="subheader">By <a href="#">{{author}}</a> on {{date}}</p>
+                {{{content}}}
+            </article>
         </div>
-        <footer class="row">
-            <div class="large-12 columns"></div>
-        </footer>
-        <!-- build:js js/jquery.min.js -->
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <!-- /build -->
-        <!-- build:js js/foundation.min.js -->
-        <script src="../bower_components/foundation/js/foundation/foundation.js"></script>
-        <!-- /build -->
-        <!-- build:js js/content.min.js -->
-        <script src="js/content.js"> </script>
-        <!-- /build -->
-    </body>
+    </div>
+    
+    <div class="row">
+        <hr/>
+        <div class="large-6 columns">
+            <a href="{{prevPage}}">{{prevPageTitle}}</a>
+        </div>
+        <div class="large-6 columns">
+            <ul class="inline-list right">
+                <li>
+                    <a href="{{nextPage}}">{{nextPageTitle}}</a>
+                </li>
+            </ul>
+        </div>
+        <hr/>
+    </div>
+    
+    <footer class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-6 columns">
+                    <!--
+                    <p>© None ...</p>
+                    -->
+                </div>
+                <div class="large-6 columns">
+                    <ul class="inline-list right">
+                        <li><a href="#">Top </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- build:js js/jquery.min.js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <!-- /build -->
+    <!-- build:js js/foundation.min.js -->
+    <script src="../bower_components/foundation/js/foundation/foundation.js"></script>
+    <!-- /build -->
+    <!-- build:js js/foundation.topbar.min.js -->
+    <script src="../bower_components/foundation/js/foundation/foundation.topbar.js"></script>
+    <!-- /build -->
+    <!-- build:js js/content.min.js -->
+    <script src="js/content.js"></script>
+    <!-- /build -->
+    
+</body>
 
 </html>
