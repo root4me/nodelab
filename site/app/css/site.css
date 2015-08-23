@@ -1,219 +1,191 @@
+@charset "UTF-8";
+@import url("http://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en");
+@import url("http://fonts.googleapis.com/icon?family=Material+Icons");
 body {
-    font-family: 'PT Sans', sans-serif, Helvetica, Arial;
-    font-weight: 400;
-    background-color: rgba(0, 0, 0, 0.02);
-}
-.button {
-    font-family: 'PT Sans', sans-serif, Helvetica, Arial;
-}
-.button-group li {
-    padding-top: 3%;
-}
-.button-group a {
-    color: rgba(0, 0, 0, 1);
-    background-color: transparent;
-}
-.button-group a:hover {
-    color: rgba(0, 0, 0, 0.4);
-    background-color: transparent;
-}
-.button-group {
-    float: none;
-}
-@media only screen and (min-width: 40.063em) {
-    .button-group {
-        float: right;
-    }
-}
-/*
-.namelogo {
-  padding: 20px 10px 0px 10px;
-}
-*/
-/*
-@media only screen and (min-width: 40.063em) {
-    .namelogo {
-        padding-bottom: 20px;
-    }
-}
-*/
+  font-family: "Roboto", "PT Sans", sans-serif, Helvetica, Arial;
+  background-color: rgba(0, 0, 0, 0.02);
+  /* set back ground image for the page */
+  background-image: url("../img/hero.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  content: '';
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0; }
 
+/* Top Nav styles */
 .namelogo h1 {
-    font-size: 1.5em;
-    font-weight: 600;
-    text-align: center;
-}
+  font-family: "Roboto", "PT Sans", sans-serif, Helvetica, Arial;
+  font-size: 1.5em;
+  font-weight: 600;
+  text-align: center; }
+
 @media only screen and (min-width: 40.063em) {
-    .namelogo h1 {
-        font-size: 16px;
-        text-align: left;
-    }
-}
+  .namelogo h1 {
+    font-size: 20px;
+    text-align: center; } }
+
 @media only screen and (min-width: 64.063em) {
-    .namelogo h1 {
-        font-size: 24px;
-        text-align: left;
-    }
-}
-.hero {
-    background: url(../img/hero.jpg);
-    background-size: cover;
-    box-shadow: inset 0px 0px 0 2000px rgba(0, 0, 0, 0.15);
-    height: 80%;
-}
-.intro-text {
-    padding-top: 40%;
-    color: rgba(255, 255, 255, 1);
-    text-align: center;
-}
-@media only screen and (min-width: 40.063em) {
-    .intro-text {
-        padding-top: 25%;
-    }
-}
-@media only screen and (min-width: 64.063em) {
-    .intro-text {
-        padding-top: 18%;
-    }
-}
-.intro-text p {
-    font-family: 'PT Sans', sans-serif, Helvetica, Arial;
-    font-size: 44px;
-}
-.about,
-.work,
-.contact {
-    padding: 50px 0 0 0;
-}
-.about img {
-    width: 250px;
-    height: 250px;
-    border-radius: 150px;
-    -webkit-border-radius: 150px;
-    -moz-border-radius: 150px;
-}
-.work img {
-    width: 200px;
-    height: 200px;
-    border-radius: 150px;
-    -webkit-border-radius: 150px;
-    -moz-border-radius: 150px;
-    border: 1px solid #cccccc;
-}
-
-.work img:hover {
-    opacity: 0.5;
-    -webkit-transition: 0.3s ease;
-    -moz-transition: 0.3s ease;
-    -ms-transition: 0.3s ease;
-    -o-transition: 0.3s ease;
-    transition: 0.3s ease;
-}
-
-.work li {
-    height: 250px;
-    overflow: hidden;
-}
-hr {
-    border: 0;
-    height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    opacity: 0.8;
-}
-footer {
-    padding: 80px 0 10px 0;
-}
-footer a:hover {
-    color: rgba(0, 0, 0, 0.4);
-    background-color: transparent;
-}
-
-/*-- Post */
-.post {
-    padding: 20px 0 0 0;
-}
-.movie {
-    background-color: #e67e22;
-}
-.health {
-    background-color: #2ecc71;
-}
-.pirate {
-    background-color: #2c3e50;
-}
-.sass {
-    background-color: #e74c3c;
-}
-.code {
-    background-color: #1abc9c;
-}
-.button.ghost {
-    margin-bottom: 0;
-    background-color: #34495e;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    padding: 0.5rem 1.5rem;
-    transition: all 0.3 ease-out;
-    color: #fff;
-}
-.button.ghost:hover {
-    background-color: #fff;
-    color: #34495e;
-    transition: 0.2 ease;
-}
-.row.full {
-    max-width: 100%;
-}
-.content img {
-    width: 400px;
-}
-.content img.author {
-    float: right;
-    border-radius: 50%;
-    height: 48px;
-    width: 48px;
-}
-.content h2 {
-    color: #222222;
-/*    border-bottom: 1px solid #34495e; */
-}
-.content h3 {
-    color: #222222;
-    letter-spacing: 0.1em;
-    /* border-bottom: 1px solid #34495e; */
-}
-.content h4 {
-    /*
-    border-bottom: 1px solid #34495e;
-    text-transform: uppercase;
-    */
-    
-    color: #222222;
-    letter-spacing: 0.1em;
-}
-.social-header i {
-    font-size: 3rem;
-    color: #fff;
-    margin: 10px 15px;
-}
-.social-header i:hover {
-    transform: scale(1.5);
-    transition: .6s ease-in-out;
-}
-/* Top nav */
+  .namelogo h1 {
+    font-size: 24px;
+    text-align: left; } }
 
 .contain-to-grid {
-    background: #ffffff;
-    border-bottom: 1px solid #cccccc;
-}
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+
 .top-bar {
-    background: #ffffff;
-}
-.top-bar .name h1 a {
-    width: auto;
-}
+  background: white; }
+  .top-bar
+.name
+h1 a {
+    width: auto; }
 
+/* post styles _post.scss */
+.post {
+  margin-top: 50px;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.137255) 0px 4px 5px 0px, rgba(0, 0, 0, 0.117647) 0px 1px 10px 0px, rgba(0, 0, 0, 0.2) 0px 2px 4px -1px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  /* hack to make sure footer shows up towards the bottom for pages with not much content. 
+must revisit. there must be a better way
+*/
+  min-height: 80%; }
+  .post .headerimage {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    position: relative;
+    min-height: 100px;
+    background-color: #00bcd4; }
+    .post .headerimage .title {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      padding: 20px;
+      color: #424242; }
+      .post .headerimage .title h3 {
+        font-family: "Roboto", "PT Sans", sans-serif, Helvetica, Arial;
+        color: white;
+        margin: 0px;
+        padding: 0px; }
 
+.post .authorinfo {
+  align-items: center;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.26);
+  display: flex;
+  flex-direction: colum;
+  font-size: 13px;
+  font-weight: normal;
+  justify-content: flex-start;
+  padding: 15px; }
+  .post .authorinfo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px; }
+  .post .authorinfo span {
+    color: rgba(0, 0, 0, 0.26);
+    display: block;
+    padding-left: 5px; }
+
+.post .content {
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 15px; }
+  .post .content pre {
+    background-color: #424242;
+    padding: 2px; }
+
+/* end post styles _post.scss */
+code {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: #424242;
+  word-wrap: break-word;
+  border-width: 0px; }
+
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
+
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54); }
+
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.md-light {
+  color: white; }
+
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3); }
+
+/* begin bottom nav styling */
+.bottom-nav-container {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.bottom-nav {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  margin-top: 12px; }
+
+.bottom-nav i {
+  background-color: #448aff;
+  border-radius: 30px; }
+
+.bottom-nav i:hover {
+  opacity: 0.5;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  transition: 0.3s ease; }
+
+/* begin bottom nav styling */
+.footer {
+  background-color: #424242; }
+
+.footer p.slogan {
+  color: #8d9093;
+  font-size: 1.8rem;
+  margin: 0 0 1rem; }
+
+.footer p.copywrite {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.875rem;
+  margin: 0; }
+
+.footer .links a {
+  list-style: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3rem 0 2rem;
+  margin: 0; }
+
+.footer .links a::after {
+  content: "•";
+  padding: 0 0.4rem 0 0.8rem; }
+
+.footer .links a:last-child::after {
+  content: "";
+  padding: 0 0.4rem 0 0.8rem; }
+
+/*# sourceMappingURL=site.css.map */

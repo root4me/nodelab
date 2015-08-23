@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 
         uglify: {
             options: {
-                banner: '/*Packaged on : <%=grunt.template.today("yyyy-mm-dd")%>*/\n'
+//                banner: '/*Packaged on : <%=grunt.template.today("yyyy-mm-dd")%>*/\n'
             },
             dist: {
                 files: [{
@@ -98,6 +98,9 @@ module.exports = function(grunt) {
             },
         },
         cssmin: {
+            options: {
+            processImport: false,
+            },
             dist: {
                 files: [{
                     expand: true,
@@ -129,6 +132,8 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['clean', 'gen', 'copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+
+    grunt.registerTask('build', ['copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
 
     grunt.registerTask('gen', 'Generate site from templates', function() {
         var sitegen = require('sitegen');
