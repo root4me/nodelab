@@ -99,6 +99,8 @@
 
 .card {
   margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   box-shadow: rgba(0, 0, 0, 0.137255) 0px 4px 5px 0px, rgba(0, 0, 0, 0.117647) 0px 1px 10px 0px, rgba(0, 0, 0, 0.2) 0px 2px 4px -1px;
   box-sizing: border-box;
   display: flex;
