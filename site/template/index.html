@@ -5,130 +5,285 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Technology for inquisitive minds" />
-    <title>root4me | Technology for inquisitive minds </title>
-
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <title>root4me | Technology for inquisitive minds</title>
 
     <!-- build:css css/foundation.min.css -->
     <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css" />
     <!-- /build -->
-    <!-- build:css css/home.min.css -->
-    <link rel="stylesheet" href="css/home.css" />
+
+    <!-- build:css css/site.min.css -->
+    <link rel="stylesheet" href="css/site.css" />
     <!-- /build -->
+
     <!-- build:js js/modernizr.min.js -->
     <script src="../bower_components/foundation/js/vendor/modernizr.js"></script>
     <!-- /build -->
 </head>
 
 <body>
-    <!-- top nav -->
-    <div class="contain-to-grid sticky">
-        <nav class="top-bar" data-topbar role="navigation">
-            <ul class="title-area">
-                <li class="namelogo">
-                    <h1><a href="index.html">root4me</a></h1>
-                </li>
-                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
-                </li>
-            </ul>
-            <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right"> </ul>
-                <!-- Left Nav Section -->
-                <ul class="left">
-                    <li></li>
-                </ul>
-            </section>
-        </nav>
-    </div>
-    <!-- end top nav -->
-
-    <div class="hero">
-        <div class="row">
-            <div class="large-12 columns intro-text">
-                <p>Learn from yesterday,
-                    <br> live for today,
-                    <br> hope for tomorrow.
-                    <br> The important thing is not to stop questioning.</p>
-                    <br>-Albert Einstein-
+    <div class="main-wrapper">
+        <header id="intro" class="hero">
+            <div class="intro-text">
+                <p>
+                    Learn from yesterday,
+                    <br>live for today,
+                    <br>hope for tomorrow.
+                    <br>The important thing is not to stop questioning
+                </p>
+                <br>- Albert Einstein -
             </div>
-        </div>
-    </div>
+        </header>
+        <!-- probably better to inject overlay section and  css using javascript. That is enhancement for later -->
+        <section id="intro-overlay" class="hero-overlay">
+        </section>
 
-    <div class="row about">
-        <div class="medium-6 large-8 columns">
-            <h4>About</h4>
-            <p>A colleciton of notes, quotes and howtos from my pursuit of knowledge.
-                <br>I have feverishly tried to learn and absorb knowledge any chance I get. In fact; most of the time I am not working, I am reading up on things I do not know (Oh ... life before google was so different... grrr).
-                Gone through phases of being a tinkerer, maker and a multicopter enthusiast in recent years. Nothing too serious, just enough to keep the creative grey matter alive. 
-                Finally, I have come to the phase where I want to write things down.
-            </p>
-        </div>
-        <div class="medium-6 large-4 columns">
-            <img src="img/about.jpg">
-        </div>
-    </div>
-
-    <div class="row work">
-        <hr>
-        <div class="large-12 columns">
-            <h4>Categories</h4>
-            <p></p>
-
-            <ul class="clearing-thumbs small-block-grid-1 medium-block-grid-2 large-block-grid-4" data-clearing>
-                <li>
-                    <a href="https://www.youtube.com/channel/UCX6hM9B14UTycfekFDkJfIw" target="_blank"><img data-caption="youtube=" src="img/youtube.png">
-                    </a>
-                </li>
-                <li>
-                    <a href="linux.html"><img data-caption="linux" src="img/linux.png">
-                    </a>
-                </li>
-                <li>
-                    <a href="beagle-bone-black.html"><img data-caption="embedded" src="img/embedded.jpg">
-                    </a>
-                </li>
-                <li>
-                    <a href="mini-quadcopter-build.html"><img data-caption="multirorot" src="img/multirotor.jpg">
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-
-    <footer class="row">
-        <div class="large-12 columns">
+        <!-- 
+Nothing fancy here. Just a section to hold some content, so we can scroll.
+Too lazy to style it and get it responsive. Instead using zurb foundation grid 'row' and 'column' classes
+-->
+        <section class="homecontent">
             <div class="row">
-                <div class="large-6 columns">
-                    <!--
-                    <p>© None ...</p>
-                    -->
-                </div>
-                <div class="large-6 columns">
-                    <ul class="inline-list right">
-                        <li><a href="#">Top </a>
-                        </li>
-                    </ul>
+                <div class="column">
+                    <h1>About</h1>
+                    <p>
+                        Notes, thoughts and how-to(s), sprinkled with snippets of code to taste.
+                        <br>Experiments, that keep one engaged, beyond dreary work days.
+                        <br>Some of it are to remind, what was read, but need to refer.
+                        <br>Truth be told, the content is dry, this site itself is an experiment in progress.
+                    </p>
                 </div>
             </div>
+        </section>
+
+        <section id="sporty" class="img-bg-section60">
+            <div class="section-header">
+                <h1>Top Picks</h1>
+            </div>
+        </section>
+        <section id="sporty-overlay" class="img-bg-section60-overlay">
+        </section>
+
+        <section class="homecontent">
+            <div class="row">
+                <div class="row">
+                    <div class="large-6 columns">
+                        <a href="linux.html">
+                            <div class="card">
+                                <div class="header">
+                                    <img src="img/linux.png">
+                                    <span class="title"><h3>Linux</h3></span>
+                                </div>
+
+                                <div class=" row ">
+                                    <div class="large-2 columns authorinfo ">
+                                        <div class="namelogo ">
+                                            <img src="img/about.jpg " />
+                                        </div>
+                                        <div>
+                                            <span>root4me</span>
+                                            <span>08/02/2015</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="large-10 columns content ">
+                                        <p>I have been using ubuntu as my primary operating system at home for over a year now. Till then, it was an on and off relationship with linux, mostly by spinning up VM and trying out different distros of linux. </p>
+                                        <p>One day, I decided that VM is too slow and I must partition the disk ...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <div class="large-6 columns">
+                        <a href="beagle-bone-black.html">
+                            <div class="card">
+                                <div class="header">
+                                    <img src="img/embedded.jpg">
+                                    <span class="title"><h3>Embedded systems</h3></span>
+                                </div>
+
+                                <div class=" row ">
+                                    <div class="large-2 columns authorinfo ">
+                                        <div class="namelogo ">
+                                            <img src="img/about.jpg " />
+                                        </div>
+                                        <div>
+                                            <span>root4me</span>
+                                            <span>07/26/2015</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="large-10 columns content ">
+                                        <p>
+                                            BeagleBoneBlack is so easy to set up once you unpack it from the box. I bought one back in 2013 and then prompty digressed into learning node.js (triggered by the fact that the device showcases samples using bonescript as soon as you plug it in). I do
+                                            not regret learning node.js. It was a lot of fun and gave me an opportunity to smirk ...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-6 columns">
+                        <a href="mini-quadcopter-build.html">
+                            <div class="card">
+                                <div class="header">
+                                    <img src="img/miniQuad_gt4.jpg">
+                                    <span class="title"><h3>Multi Rotor</h3></span>
+                                </div>
+
+                                <div class=" row ">
+                                    <div class="large-2 columns authorinfo ">
+                                        <div class="namelogo ">
+                                            <img src="img/about.jpg " />
+                                        </div>
+                                        <div>
+                                            <span>root4me</span>
+                                            <span>11/01/2014</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="large-10 columns content ">
+                                        <p>Number of crashes, broken frames, attempts at tuning the motors, flight controller and a lot of frustrations later; I decided that the first quadcopter I tried to build was not going to get me to the point of taking
+                                            stable videos form the sky with out some serious rework. I did some research (Google and read what others have written is now a days called research) ...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="large-6 columns">
+                        <a href="https://www.youtube.com/channel/UCX6hM9B14UTycfekFDkJfIw" target="_blank">
+                            <div class="card">
+                                <div class="header">
+                                    <img src="img/youtube.png">
+                                    <span class="title"><h3>Channel</h3></span>
+                                </div>
+
+                                <div class=" row ">
+                                    <div class="large-2 columns authorinfo ">
+                                        <div class="namelogo ">
+                                            <img src="img/about.jpg " />
+                                        </div>
+                                        <div>
+                                            <span>root4me</span>
+                                            <span>07/26/2015</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="large-10 columns content ">
+                                        <p>
+                                            The tube !
+                                            <br>Hooked to the tube, are you ?
+                                            <br>Here are some videos to watch while you are getting your daily fix of the tube.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </section>
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="row">
+                <div class="small-12 columns">
+                    <p class="slogan"></p>
+                    <p class="links">
+                        <a href="http://www.root4.me/">Home</a>
+                        <a href="#">Top</a>
+                    </p>
+                    <p class="copywrite">© 2015 .... Hand crafted with care. Copy, Right &#9786; </p>
+                </div>
+            </div>
+        </footer>
+        <!-- end footer -->
+
         </div>
-    </footer>
+
+        <!-- build:js js/jquery.min.js -->
+        <script src="../bower_components/jquery/dist/jquery.js "></script>
+        <!-- /build -->
+
+        <!-- build:js js/foundation.min.js -->
+        <script src="../bower_components/foundation/js/foundation/foundation.js "></script>
+        <!-- /build -->
+
+        <!-- build:js js/app.min.js -->
+        <script src="js/app.js "></script>
+        <!-- /build -->
 
 
-    <!-- build:js js/jquery.min.js -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <!-- /build -->
-    <!-- build:js js/foundation.min.js -->
-    <script src="../bower_components/foundation/js/foundation/foundation.js"></script>
-    <!-- /build -->
-    <!-- build:js js/foundation.topbar.min.js -->
-    <script src="../bower_components/foundation/js/foundation/foundation.topbar.js"></script>
-    <!-- /build -->
-    <!-- build:js js/content.min.js -->
-    <script src="js/content.js"></script>
-    <!-- /build -->
+        <script>
+            $(function() {
+                $('#intro').scrollnfade();
+                $('#sporty').scrollnfade();
+            });
+
+            $(document).foundation();
+
+            (function($) {
+                var elements = [];
+                var elementsOverlay = [];
+
+                $.fn.scrollnfade = function(options) {
+
+                    var settings = $.extend({
+                        // TBD
+                    }, options);
+
+                    var update = function() {
+                        var scrollPos = window.scrollY;
+                        var top = 0;
+                        var height = 0;
+                        var opacity = 0;
+                        var element = null;
+                        var elementOverlay = null;
+
+                        for (var i = 0; i < elements.length; i++) {
+                            element = elements[i];
+                            elementOverlay = elementsOverlay[i];
+                            top = element.offset().top;
+                            height = element.height();
+
+                            if (scrollPos > (top + height) || (scrollPos < top)) {
+                                continue;
+                            }
+                            else {
+                                opacity = 1 - ((scrollPos - top) / (height));
+                                element.css('opacity', opacity);
+                                elementOverlay.css('opacity', 1 - opacity);
+                            }
+                            console.log(element.offset().top);
+                        }
+                    };
+
+                    var onScroll = function() {
+                        requestAnimationFrame(update);
+                    };
+
+                    var init = function(element) {
+                        window.addEventListener('scroll', onScroll, false);
+                        elements.push(element);
+
+                        // position overlays over image sections
+                        $(element.selector + '-overlay').offset({
+                            top: $(element.selector).offset().top,
+                            left: $(element.selector).offset().left
+                        });
+
+                        elementsOverlay.push($(element.selector + '-overlay'));
+                    };
+
+                    init(this);
+                };
+
+            }(jQuery));
+        </script>
 </body>
 
 </html>

@@ -21,83 +21,84 @@
 </head>
 
 <body>
-    <!-- top nav -->
-    <div class="contain-to-grid sticky">
-        <nav class="top-bar" data-topbar role="navigation">
-            <ul class="title-area">
-                <li class="namelogo">
-                    <h1><a href="index.html">root4me</a></h1>
-                </li>
-                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
-                </li>
-            </ul>
-            <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right">
-                    <li></li>
+    <div class="main-wrapper">
+        <!-- top nav -->
+        <div class="contain-to-grid sticky">
+            <nav class="top-bar" data-topbar role="navigation">
+                <ul class="title-area">
+                    <li class="namelogo">
+                        <h1><a href="index.html">root4me</a></h1>
+                    </li>
+                    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
+                    </li>
                 </ul>
-                <!-- Left Nav Section -->
-                <ul class="left">
-                    <li></li>
-                </ul>
-            </section>
-        </nav>
-    </div>
-    <!-- end top nav -->
-
-    <div class="row post">
-        <div class="large-12 columns headerimage">
-            <div class="title">
-                <h3>{{title}}</h3>
-            </div>
+                <section class="top-bar-section">
+                    <!-- Right Nav Section -->
+                    <ul class="right">
+                        <li></li>
+                    </ul>
+                    <!-- Left Nav Section -->
+                    <ul class="left">
+                        <li></li>
+                    </ul>
+                </section>
+            </nav>
         </div>
+        <!-- end top nav -->
 
-        <div class="large-12 columns">
-            <div class=" row ">
-                <div class="large-2 columns authorinfo ">
-                    <div class="namelogo ">
-                        <img src="img/about.jpg " />
-                    </div>
-                    <div>
-                        <span>{{author}}</span>
-                        <span>{{date}}</span>
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="post">
+                        <div class="header">
+                            <!--
+                            <img src="http://lorempixel.com/980/200/city/9">
+                            -->
+                            <span class="title"><h3>{{title}}</h3></span>
+                        </div>
+                        <div class=" row ">
+                            <div class="large-2 columns authorinfo ">
+                                <div class="namelogo ">
+                                    <img src="img/about.jpg " />
+                                </div>
+                                <div>
+                                    <span>{{author}}</span>
+                                    <span>{{date}}</span>
+                                </div>
+                            </div>
+
+                            <div class="large-10 columns content ">{{{content}}}</div>
+                        </div>
+                        <div class="action">
+                            <div class="left">
+                                <a href='{{prevPage}}'>Previous</a>
+                            </div>
+                            <div class="right">
+                                <a href='{{nextPage}}'>Next</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="large-10 columns content "> {{{content}}} </div>
             </div>
         </div>
-    </div>
-
-
-    <div class="row ">
-        <div class="small-6 medium-6 large-6 columns bottom-nav-container ">
-            <nav class="bottom-nav ">
-                <a href="{{prevPage}}"><i class="material-icons md-36 md-light ">arrow_back</i> </a>
-            </nav>
-        </div>
-        <div class="small-6 medium-6 large-6 columns bottom-nav-container ">
-            <nav class="bottom-nav right ">
-                <a href="{{nextPage}}"><i class="material-icons md-36 md-light ">arrow_forward</i> </a>
-            </nav>
-        </div>
-    </div>
-
-    <!-- footer -->
-    <footer class="footer">
-        <div class="row">
-            <div class="small-12 columns">
-                <p class="slogan"></p>
-                <p class="links">
-                    <a href="index.html">Home</a>
-                    <a href="#">Top</a>
-                </p>
-                <p class="copywrite">© 2015 .... Hand crafted with care. Copy, Right &#9786; </p>
+        <!-- footer -->
+        <footer class="footer">
+            <div class="row">
+                <div class="small-12 columns">
+                    <p class="slogan"></p>
+                    <p class="links">
+                        <a href="#">Home</a>
+                        <a href="#">Top</a>
+                    </p>
+                    <p class="copywrite">© 2015 .... Hand crafted with care. Copy, Right &#9786; </p>
+                </div>
             </div>
-        </div>
-    </footer>
-    <!-- end footer -->
+        </footer>
+        <!-- end footer -->
 
+    </div>
     <!-- build:js js/jquery.min.js -->
     <script src="../bower_components/jquery/dist/jquery.js "></script>
     <!-- /build -->
@@ -108,9 +109,10 @@
     <script src="../bower_components/foundation/js/foundation/foundation.topbar.js "></script>
     <!-- /build -->
 
-    <!-- build:js js/content.min.js -->
-    <script src="js/content.js "></script>
+    <!-- build:js js/app.min.js -->
+    <script src="js/app.js "></script>
     <!-- /build -->
 
 </body>
 
+</html>
