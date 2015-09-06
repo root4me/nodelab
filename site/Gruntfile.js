@@ -11,7 +11,9 @@ module.exports = function(grunt) {
         app: 'app',
         dist: 'dist',
         srcjs: ['js/*.*', '../bower_components/foundation/js/vendor/modernizr.js', '../bower_components/jquery/dist/jquery.js',
-        '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/foundation/js/foundation/foundation.topbar.js'],
+            '../bower_components/foundation/js/foundation/foundation.js', '../bower_components/foundation/js/foundation/foundation.topbar.js'
+        ],
+        srcscss: ['scss/*.*'],
         srccss: ['css/*.*', '../bower_components/foundation/css/foundation.css'],
         srcimg: ['img/*.*'],
     };
@@ -27,7 +29,8 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     dot: true,
-                    src: ['.tmp', '<%= config.dist %>/*', '<%= config.app %>/*.html', '!<%= config.dist %>/.git*']
+//                    src: ['.tmp', '<%= config.dist %>/*', '<%= config.app %>/*.html', '!<%= config.dist %>/.git*']
+                    src: ['.tmp', '<%= config.dist %>/*', '!<%= config.dist %>/.git*']
                 }]
             },
         },
@@ -56,31 +59,32 @@ module.exports = function(grunt) {
                 }]
             },
 
+/*
             srcimg: {
                 files: [{
-                        expand: true,
-                        cwd: 'draft',
-                        src: '<%= config.srcimg %>',
-                        dest: '<%= config.app %>',
+                    expand: true,
+                    cwd: 'draft',
+                    src: '<%= config.srcimg %>',
+                    dest: '<%= config.app %>',
 
-                    }]
+                }]
             },
-
+*/
             distimg: {
                 files: [{
-                        expand: true,
-                        cwd: '<%= config.app %>',
-                        src: '<%= config.srcimg %>',
-                        dest: '<%= config.dist %>',
+                    expand: true,
+                    cwd: '<%= config.app %>',
+                    src: '<%= config.srcimg %>',
+                    dest: '<%= config.dist %>',
 
-                    }]
+                }]
             },
 
         },
 
         uglify: {
             options: {
-//                banner: '/*Packaged on : <%=grunt.template.today("yyyy-mm-dd")%>*/\n'
+                //                banner: '/*Packaged on : <%=grunt.template.today("yyyy-mm-dd")%>*/\n'
             },
             dist: {
                 files: [{
@@ -99,7 +103,7 @@ module.exports = function(grunt) {
         },
         cssmin: {
             options: {
-            processImport: false,
+                processImport: false,
             },
             dist: {
                 files: [{
@@ -113,6 +117,21 @@ module.exports = function(grunt) {
             }
         },
 
+        sass: {
+            options: {
+                sourceMap: true,
+                style: 'expanded'
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.app %>/scss',
+                    src: ['*.scss'],
+                    dest: '<%= config.app %>/css',
+                    ext: '.css'
+                }]
+            }
+        },
         htmlmin: {
             dist: {
                 options: {
@@ -128,12 +147,29 @@ module.exports = function(grunt) {
             },
 
         },
-
+        watch: {
+            scss: {
+                files: '<%= config.app %>/scss/*',
+                tasks: ['sass']
+            }
+        },
+        
     });
 
-    grunt.registerTask('default', ['clean', 'gen', 'copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('build', ['copy:template',  'copy:srcimg' , 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+    grunt.registerTask('default', ['usage']);
+    grunt.registerTask('dev', ['sass', 'watch:scss']);
+    grunt.registerTask('build', ['clean:dist','sass', 'gen', 'copy:template', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+
+    grunt.registerTask('usage', 'display usage parameters', function() {
+        console.log("usage :");
+        console.log("\t grunt clean:dist - cleans /dist folder");
+        console.log("\t grunt dev - development mode");
+        console.log("\t grunt build - build and update minimized version to /dist folder");
+    });
+    
+    //grunt.registerTask('default', ['clean', 'gen', 'copy:template', 'copy:srcimg', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
 
     grunt.registerTask('gen', 'Generate site from templates', function() {
         var sitegen = require('sitegen');

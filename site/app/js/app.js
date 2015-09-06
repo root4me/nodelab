@@ -1,17 +1,5 @@
 $(document).foundation();
 
-$(window).on("load", function(e) {
-    $('#intro').scrollnfade();
-    $('#sporty').scrollnfade();
-});
-
-$(window).on("resize", function(e) {
-    $('#intro').scrollnfadeReinit(); // do this only once
-
-    $('#intro').scrollnfade();
-    $('#sporty').scrollnfade();
-});
-
 
 (function($) {
     var elements = [];
@@ -21,6 +9,7 @@ $(window).on("resize", function(e) {
         elements.splice(0, elements.length);
         elementsOverlay.splice(0, elements.length);
     };
+    
     $.fn.scrollnfade = function(options) {
 
         var settings = $.extend({

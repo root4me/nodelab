@@ -217,6 +217,20 @@ Too lazy to style it and get it responsive. Instead using zurb foundation grid '
         <script src="js/app.js "></script>
         <!-- /build -->
 
+        <script>
+            $(window).on("load", function(e) {
+                $('#intro').scrollnfade();
+                $('#sporty').scrollnfade();
+            });
+
+            $(window).on("resize", function(e) {
+                $(document).scrollnfadeReinit(); // do this only once
+
+                $('#intro').scrollnfade();
+                $('#sporty').scrollnfade();
+            });
+        </script>
+
 </body>
 
 </html>

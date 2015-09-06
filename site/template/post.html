@@ -49,36 +49,33 @@
 
         <div class="content-wrapper">
             <div class="row">
-                <div class="large-12 columns">
-                    <div class="post">
-                        <div class="header">
-                            <!--
+                <div class="post">
+                    <div class="header">
+                        <!--
                             <img src="http://lorempixel.com/980/200/city/9">
                             -->
-                            <span class="title"><h3>{{title}}</h3></span>
-                        </div>
-                        <div class=" row ">
-                            <div class="large-2 columns authorinfo ">
-                                <div class="namelogo ">
-                                    <img src="img/about.jpg " />
-                                </div>
-                                <div>
-                                    <span>{{author}}</span>
-                                    <span>{{date}}</span>
-                                </div>
+                        <span class="title"><h3>{{title}}</h3></span>
+                    </div>
+                    <div class=" row ">
+                        <div class="large-2 columns authorinfo ">
+                            <div class="namelogo ">
+                                <img src="img/about.jpg " />
                             </div>
-
-                            <div class="large-10 columns content ">{{{content}}}</div>
-                        </div>
-                        <div class="action">
-                            <div class="left">
-                                <a href='{{prevPage}}'>Previous</a>
-                            </div>
-                            <div class="right">
-                                <a href='{{nextPage}}'>Next</a>
+                            <div>
+                                <span>{{author}}</span>
+                                <span>{{date}}</span>
                             </div>
                         </div>
 
+                        <div class="large-10 columns content ">{{{content}}}</div>
+                    </div>
+                    <div class="action">
+                        <div class="left">
+                            <a href='{{prevPage}}'>Previous</a>
+                        </div>
+                        <div class="right">
+                            <a href='{{nextPage}}'>Next</a>
+                        </div>
                     </div>
                 </div>
             </div>
