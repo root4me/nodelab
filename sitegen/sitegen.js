@@ -72,6 +72,8 @@ var generatepost = function(f, p, n) {
         var pt;
         var pb = handlebars.compile(fs.readFileSync(path.resolve(config.tfolder, "indexpages.html"), 'utf8'));
 
+        console.log(pb);
+       /* 
         for (var i = 0; i < fmatter.rows.length; i++) {
 
             for (var c = 0; c < fmatter.rows[i].columns.length; c++) {
@@ -82,9 +84,17 @@ var generatepost = function(f, p, n) {
 
             pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
 
-            fs.writeFileSync(path.resolve(config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
+            console.log(pt);
+            
+            //fs.writeFileSync(path.resolve(config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
         }
+    */
+           // pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
 
+            pt = pb(fmatter);
+            console.log(pt);
+            fs.writeFileSync(path.resolve(config.pfolder, "index.html"), pt, "utf8");
+            
         //copy over the index page to output
         fs.createReadStream(path.resolve(config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(config.pfolder + '/index.html')));
 
