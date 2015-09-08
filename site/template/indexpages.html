@@ -1,27 +1,40 @@
-<head>
-{{#if prev}}
-    <link rel="prev" href="{{prev}}">
-{{/if}}
-{{#if next}}
-    <link rel="next" href="{{next}}">
-{{/if}}
-</head>
-{{#each rows}}
-<div class="row">
-{{#each columns}}
-    <div class="large-6 small-12 columns">
-    {{#if ext}}
-        <a href="{{href}}" target="_blank">
-    {{else}}
-        <a href="{{href}}">    
-    {{/if}}
-        <img src="{{img}}" >
-        <div class="panel">
-        <p>{{desc}}</p>
-        </div>
-        </a>
-    </div>
-{{/each}}
-</div>
-{{/each}}
 
+
+                {{#each rows}}
+                <div class="row">
+                    {{#each columns}}
+                    <div class="large-6 columns">
+                        
+                    {{#if ext}}
+                        <a href="{{href}}" target="_blank">
+                    {{else}}
+                        <a href="{{href}}">    
+                    {{/if}}  
+            
+                            <div class="card">
+                                <div class="header">
+                                    <img src="{{img}}">
+                                    <span class="title"><h3>{{title}}</h3></span>
+                                </div>
+
+                                <div class=" row ">
+                                    <div class="large-2 columns authorinfo ">
+                                        <div class="namelogo ">
+                                            <img src="img/about.jpg " />
+                                        </div>
+                                        <div>
+                                            <span>{{author}}</span>
+                                            <span>{{date}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="large-10 columns content ">
+                                        <p>{{{desc}}}/p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {{/each}}
+                </div>
+                {{/each}}

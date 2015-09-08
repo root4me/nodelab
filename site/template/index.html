@@ -64,14 +64,21 @@ Too lazy to style it and get it responsive. Instead using zurb foundation grid '
         </section>
 
         <section class="homecontent">
-            <div class="row">
+                {{#each rows}}
                 <div class="row">
+                    {{#each columns}}
                     <div class="large-6 columns">
-                        <a href="linux.html">
+                        
+                    {{#if ext}}
+                        <a href="{{href}}" target="_blank">
+                    {{else}}
+                        <a href="{{href}}">    
+                    {{/if}}  
+            
                             <div class="card">
                                 <div class="header">
-                                    <img src="img/linux.png">
-                                    <span class="title"><h3>Linux</h3></span>
+                                    <img src="{{img}}">
+                                    <span class="title"><h3>{{title}}</h3></span>
                                 </div>
 
                                 <div class=" row ">
@@ -80,112 +87,21 @@ Too lazy to style it and get it responsive. Instead using zurb foundation grid '
                                             <img src="img/about.jpg " />
                                         </div>
                                         <div>
-                                            <span>root4me</span>
-                                            <span>08/02/2015</span>
+                                            <span>{{author}}</span>
+                                            <span>{{date}}</span>
                                         </div>
                                     </div>
 
                                     <div class="large-10 columns content ">
-                                        <p>I have been using ubuntu as my primary operating system at home for over a year now. Till then, it was an on and off relationship with linux, mostly by spinning up VM and trying out different distros of linux. </p>
-                                        <p>One day, I decided that VM is too slow and I must partition the disk ...</p>
+                                        <p>{{{desc}}}/p>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-
-
-                    <div class="large-6 columns">
-                        <a href="beagle-bone-black.html">
-                            <div class="card">
-                                <div class="header">
-                                    <img src="img/embedded.jpg">
-                                    <span class="title"><h3>Embedded systems</h3></span>
-                                </div>
-
-                                <div class=" row ">
-                                    <div class="large-2 columns authorinfo ">
-                                        <div class="namelogo ">
-                                            <img src="img/about.jpg " />
-                                        </div>
-                                        <div>
-                                            <span>root4me</span>
-                                            <span>07/26/2015</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="large-10 columns content ">
-                                        <p>
-                                            BeagleBoneBlack is so easy to set up once you unpack it from the box. I bought one back in 2013 and then prompty digressed into learning node.js (triggered by the fact that the device showcases samples using bonescript as soon as you plug it in). I do
-                                            not regret learning node.js. It was a lot of fun and gave me an opportunity to smirk ...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    {{/each}}
                 </div>
-
-                <div class="row">
-                    <div class="large-6 columns">
-                        <a href="mini-quadcopter-build.html">
-                            <div class="card">
-                                <div class="header">
-                                    <img src="img/miniQuad_gt4.jpg">
-                                    <span class="title"><h3>Multi Rotor</h3></span>
-                                </div>
-
-                                <div class=" row ">
-                                    <div class="large-2 columns authorinfo ">
-                                        <div class="namelogo ">
-                                            <img src="img/about.jpg " />
-                                        </div>
-                                        <div>
-                                            <span>root4me</span>
-                                            <span>11/01/2014</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="large-10 columns content ">
-                                        <p>Number of crashes, broken frames, attempts at tuning the motors, flight controller and a lot of frustrations later; I decided that the first quadcopter I tried to build was not going to get me to the point of taking
-                                            stable videos form the sky with out some serious rework. I did some research (Google and read what others have written is now a days called research) ...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="large-6 columns">
-                        <a href="https://www.youtube.com/channel/UCX6hM9B14UTycfekFDkJfIw" target="_blank">
-                            <div class="card">
-                                <div class="header">
-                                    <img src="img/youtube.png">
-                                    <span class="title"><h3>Channel</h3></span>
-                                </div>
-
-                                <div class=" row ">
-                                    <div class="large-2 columns authorinfo ">
-                                        <div class="namelogo ">
-                                            <img src="img/about.jpg " />
-                                        </div>
-                                        <div>
-                                            <span>root4me</span>
-                                            <span>07/26/2015</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="large-10 columns content ">
-                                        <p>
-                                            The tube !
-                                            <br>Hooked to the tube, are you ?
-                                            <br>Here are some videos to watch while you are getting your daily fix of the tube.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                {{/each}}
         </section>
 
         <!-- footer -->
