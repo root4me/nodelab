@@ -70,10 +70,10 @@ var generatepost = function(f, p, n) {
     if (f.name == "index.md") {
 
         var pt;
-        var pb = handlebars.compile(fs.readFileSync(path.resolve(config.tfolder, "indexpages.html"), 'utf8'));
+        var pb = handlebars.compile(fs.readFileSync(path.resolve(config.tfolder, "index.html"), 'utf8'));
 
         console.log(pb);
-       /* 
+        /* 
         for (var i = 0; i < fmatter.rows.length; i++) {
 
             for (var c = 0; c < fmatter.rows[i].columns.length; c++) {
@@ -89,14 +89,14 @@ var generatepost = function(f, p, n) {
             //fs.writeFileSync(path.resolve(config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
         }
     */
-           // pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
+        // pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
 
-            pt = pb(fmatter);
-            console.log(pt);
-            fs.writeFileSync(path.resolve(config.pfolder, "index.html"), pt, "utf8");
-            
+        pt = pb(fmatter);
+        console.log(pt);
+        fs.writeFileSync(path.resolve(config.pfolder, "index.html"), pt, "utf8");
+
         //copy over the index page to output
-        fs.createReadStream(path.resolve(config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(config.pfolder + '/index.html')));
+        //fs.createReadStream(path.resolve(config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(config.pfolder + '/index.html')));
 
         return;
     }
@@ -158,7 +158,7 @@ module.exports.rebuildall = function(o) {
     for (var i = 0; i < drafts.length; i++) {
         generatepost(drafts[i], i == drafts.length - 1 ? null : drafts[i + 1], i > 0 ? drafts[i - 1] : null);
     }
-    
+
     // When rebuildall is run from inside grunt file in /site , copy never seem to work
     // It alway generates empty files inside the publish directory. So, commenting this out for now and instead handle copying images in grunt script itself
     // copyimgs();
