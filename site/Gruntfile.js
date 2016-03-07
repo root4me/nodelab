@@ -160,7 +160,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['usage']);
     grunt.registerTask('dev', ['sass', 'watch:scss']);
-    grunt.registerTask('build', ['clean:dist','sass', 'gen', 'copy:template', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
+    grunt.registerTask('build', ['clean:dist','sass', 'gen', 'copy:distimg', 'cssmin', 'uglify', 'processhtml', 'htmlmin']);
 
     grunt.registerTask('usage', 'display usage parameters', function() {
         console.log("usage :");
@@ -172,7 +172,7 @@ module.exports = function(grunt) {
     //grunt.registerTask('default', ['clean', 'gen', 'copy:template', 'copy:srcimg', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
 
     grunt.registerTask('gen', 'Generate site from templates', function() {
-        var sitegen = require('sitegen');
+        var sitegen = require('./sitegen');
 
         sitegen.rebuildall({
             pfolder: "app"

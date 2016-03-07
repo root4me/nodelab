@@ -1,75 +1,47 @@
 ---
 {
-	"rows": [{
+	"rows": [
+	{
 		"columns": [{
-			"img": "http://img.youtube.com/vi/84YuwX6Sr5I/0.jpg",
-			"desc": "Search for fall color #2 (youtube video)",
-			"href": "http://youtu.be/84YuwX6Sr5I",
-			"ext": true
+			"img": "img/linux.png",
+			"title": "Linux",
+			"desc": "I have been using ubuntu as my primary operating system at home for over a year now. Till then, it was an on and off relationship with linux, mostly by spinning up VM and trying out different distros of linux.One day, I decided that VM is too slow  ..",
+			"href": "linux.html",
+			"author": "root4me",
+			"date": "08/05/2015",
+			"ext": false
 		},
 		{
-			"img": "http://img.youtube.com/vi/1B4ZqaQ8XLI/0.jpg",
-			"desc": "Search for fall color #3 (youtube video)",
-			"href": "http://youtu.be/1B4ZqaQ8XLI",
-			"ext": true
+			"img": "img/embedded.jpg",
+			"title": "Embedded systems",
+			"desc": "BeagleBoneBlack is so easy to set up once you unpack it from the box. I bought one back in 2013 and then prompty digressed into learning node.js (triggered by the fact that the device showcases samples using bonescript as soon as you plug it in). I do not regret learning node.js. It was a lot of fun and gave me an opportunity to smirk ...",
+			"href": "beagle-bone-black.html",
+			"author": "root4me",
+			"date": "07/26/2015",
+			"ext": false
 		}]
 	},
 	{
 		"columns": [{
 			"img": "img/miniQuad_gt4.jpg",
-			"desc": "",
-			"href": "2",
+			"title": "Multi Rotor",
+			"desc": "Number of crashes, broken frames, attempts at tuning the motors, flight controller and a lot of frustrations later; I decided that the first quadcopter I tried to build was not going to get me to the point of taking stable videos form the sky with out some serious rework ..",
+			"href": "mini-quadcopter-build.html",
+			"author": "root4me",
+			"date": "11/01/2014",
 			"ext": false
 		},
 		{
-			"img": "http://img.youtube.com/vi/pLA9WaFr2s4/0.jpg",
-			"desc": "Walk in the woods with quadcopter (youtube video)",
-			"href": "http://youtu.be/pLA9WaFr2s4",
+			"img": "img/youtube.png",
+			"title": "Channel",
+			"desc": "The tube ! Hooked to the tube, are you ? Here are some videos to watch while you are getting your daily fix of the tube.",
+			"href": "https://www.youtube.com/channel/UCX6hM9B14UTycfekFDkJfIw",
+			"author": "root4me",
+			"date": "11/01/2014",
 			"ext": true
 		}]
-	},
-	{
-		"columns": [{
-			"img": "http://img.youtube.com/vi/dI8VTuZXdhw/0.jpg",
-			"desc": "Search for fall color #1 (youtube video)",
-			"href": "http://youtu.be/dI8VTuZXdhw",
-			"ext": true
-		},
-		{
-			"img": "http://img.youtube.com/vi/Q7ahSyPiM4Y/0.jpg",
-			"desc": "Flying in the woods ... (youtube video)",
-			"href": "http://youtu.be/Q7ahSyPiM4Y",
-			"ext": true
-		}]
-	},
-	{
-		"columns": [{
-			"img": "http://img.youtube.com/vi/k9SBxXGAIAQ/0.jpg",
-			"desc": "Out and about with quadcopter (youtube video)",
-			"href": "http://youtu.be/k9SBxXGAIAQ",
-			"ext": true
-		},
-		{
-			"img": "http://img.youtube.com/vi/BvoDOVlbpcA/0.jpg",
-			"desc": "Fly in the park ... (youtube video)",
-			"href": "http://youtu.be/BvoDOVlbpcA",
-			"ext": true
-		}]
-	},
-	{
-		"columns": [{
-			"img": "http://img.youtube.com/vi/q0MdEfyXUIQ/0.jpg",
-			"desc": "And there was snow ... (youtube video)",
-			"href": "http://youtu.be/q0MdEfyXUIQ",
-			"ext": true
-		},
-		{
-                        "img": "http://img.youtube.com/vi/6oJXtHJ7YHY/0.jpg",
-                        "desc": "arduio table top bot ... (youtube video)",
-                        "href": "https://youtu.be/6oJXtHJ7YHY",
-                        "ext": true
-                }]
-	}]
+	}
+	]
 }
 ---
 
