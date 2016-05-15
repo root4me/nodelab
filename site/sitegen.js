@@ -6,7 +6,7 @@ var path = require('path');
 
 var config = {
     dfolder: 'draft', //draft folder
-    tfolder: 'template', //template folder 
+    tfolder: 'template', //template folder
     ptemplate: 'post.html', //basic post template
     pfolder: 'publish'
 };
@@ -73,7 +73,7 @@ var generatepost = function(f, p, n) {
         var pb = handlebars.compile(fs.readFileSync(path.resolve(config.tfolder, "index.html"), 'utf8'));
 
         console.log(pb);
-       /* 
+       /*
         for (var i = 0; i < fmatter.rows.length; i++) {
 
             for (var c = 0; c < fmatter.rows[i].columns.length; c++) {
@@ -85,7 +85,7 @@ var generatepost = function(f, p, n) {
             pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
 
             console.log(pt);
-            
+
             //fs.writeFileSync(path.resolve(config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
         }
     */
@@ -94,7 +94,7 @@ var generatepost = function(f, p, n) {
             pt = pb(fmatter);
             console.log(pt);
             fs.writeFileSync(path.resolve(config.pfolder, "index.html"), pt, "utf8");
-            
+
         //copy over the index page to output
         //fs.createReadStream(path.resolve(config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(config.pfolder + '/index.html')));
 
@@ -114,9 +114,9 @@ var generatepost = function(f, p, n) {
             date: fmatter.date,
             content: markdown.toHTML(fmatter.content),
             prevPageTitle: pfmatter !== null ? pfmatter.title : '',
-            prevPage: pfmatter !== null ? pfmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html" : '',
+            prevPage: pfmatter !== null ? pfmatter.title.replace(/\s+/g, '-').toLowerCase() : '',
             nextPageTitle: nfmatter !== null ? nfmatter.title : '',
-            nextPage: nfmatter !== null ? nfmatter.title.replace(/\s+/g, '-').toLowerCase() + ".html" : ''
+            nextPage: nfmatter !== null ? nfmatter.title.replace(/\s+/g, '-').toLowerCase() : ''
         });
 
     fs.writeFileSync(publishFileName, pageText, "utf8");
@@ -141,7 +141,7 @@ var copyimgs = function() {
     }
 }
 
-// rebuils 
+// rebuils
 module.exports.rebuildall = function(o) {
 
     if (o !== undefined) {
@@ -150,15 +150,15 @@ module.exports.rebuildall = function(o) {
         config.pfolder = o.pfolder !== undefined ? o.pfolder : config.pfolder;
     }
 
-    //console.log('source folder : ' + config.dfolder);
-    //console.log('publish folder : ' + config.pfolder);
+    console.log('source folder : ' + config.dfolder);
+    console.log('publish folder : ' + config.pfolder);
 
     var drafts = getdrafts();
     sort(drafts);
     for (var i = 0; i < drafts.length; i++) {
         generatepost(drafts[i], i == drafts.length - 1 ? null : drafts[i + 1], i > 0 ? drafts[i - 1] : null);
     }
-    
+
     // When rebuildall is run from inside grunt file in /site , copy never seem to work
     // It alway generates empty files inside the publish directory. So, commenting this out for now and instead handle copying images in grunt script itself
     // copyimgs();
