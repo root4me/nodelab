@@ -153,13 +153,13 @@ module.exports = function(grunt) {
                 tasks: ['sass']
             }
         },
-        
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['usage']);
-    grunt.registerTask('dev', ['sass', 'watch:scss']);
+    grunt.registerTask('dev', ['sass', 'gen', 'watch:scss']);
     grunt.registerTask('build', ['clean:dist','sass', 'gen', 'copy:distimg', 'cssmin', 'uglify', 'processhtml', 'htmlmin']);
 
     grunt.registerTask('usage', 'display usage parameters', function() {
@@ -168,12 +168,12 @@ module.exports = function(grunt) {
         console.log("\t grunt dev - development mode");
         console.log("\t grunt build - build and update minimized version to /dist folder");
     });
-    
+
     //grunt.registerTask('default', ['clean', 'gen', 'copy:template', 'copy:srcimg', 'copy:distimg', 'processhtml', 'cssmin', 'uglify', 'htmlmin']);
 
     grunt.registerTask('gen', 'Generate site from templates', function() {
         var sitegen = require('./sitegen');
-
+console.log('inside regtask');
         sitegen.rebuildall({
             pfolder: "app"
         });

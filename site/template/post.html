@@ -2,113 +2,110 @@
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{{desc}}" />
-    <title>{{title}}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="root4me" />
+  <title>root4me - {{ title }} </title>
 
-    <!-- build:css css/foundation.min.css -->
-    <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css" />
-    <!-- /build -->
+  <!-- build:css stylesheets/foundation.min.css -->
+  <link rel="stylesheet" href="/stylesheets/foundation.min.css" />
+  <!-- /build -->
 
-    <!-- build:css css/site.min.css -->
-    <link rel="stylesheet" href="css/site.css" />
-    <!-- /build -->
+  <!-- build:css stylesheets/site.min.css -->
+  <link rel="stylesheet" href="/stylesheets/site.min.css" />
+  <!-- /build -->
 
-    <!-- build:js js/modernizr.min.js -->
-    <script src="../bower_components/foundation/js/vendor/modernizr.js"></script>
-    <!-- /build -->
 </head>
 
 <body>
-    <div class="main-wrapper">
-        <!-- top nav -->
-        <div class="contain-to-grid sticky">
-            <nav class="top-bar" data-topbar role="navigation">
-                <ul class="title-area">
-                    <li class="namelogo">
-                        <h1><a href="index.html">root4me</a></h1>
-                    </li>
-                    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
-                    </li>
-                </ul>
-                <section class="top-bar-section">
-                    <!-- Right Nav Section -->
-                    <ul class="right">
-                        <li></li>
-                    </ul>
-                    <!-- Left Nav Section -->
-                    <ul class="left">
-                        <li></li>
-                    </ul>
-                </section>
-            </nav>
+
+  <div class="alert callout" data-closable id="errorAlert" style="display:none;">
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+        <div class="menu-title">
         </div>
-        <!-- end top nav -->
 
-        <div class="content-wrapper">
-            <div class="row">
-                <div class="post">
-                    <div class="header">
-                        <!--
-                            <img src="http://lorempixel.com/980/200/city/9">
-                            -->
-                        <span class="title"><h3>{{title}}</h3></span>
-                    </div>
-                    <div class=" row ">
-                        <div class="large-2 columns authorinfo ">
-                            <div class="namelogo ">
-                                <img src="img/about.jpg " />
-                            </div>
-                            <div>
-                                <span>{{author}}</span>
-                                <span>{{date}}</span>
-                            </div>
-                        </div>
-
-                        <div class="large-10 columns content ">{{{content}}}</div>
-                    </div>
-                    <div class="action">
-                        <div class="left">
-                            <a href='{{prevPage}}'>Previous</a>
-                        </div>
-                        <div class="right">
-                            <a href='{{nextPage}}'>Next</a>
-                        </div>
-                    </div>
-                </div>
+        <!-- Menu -->
+        <ul class="vertical menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/locations">Locations</a></li>
+          <li><a href="/articles/how-to-remove-user-name-from-terminal-prompt">Articles</a></li>
+        </ul>
+      </div>
+      <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right"></div>
+      <div class="off-canvas-content" data-off-canvas-content>
+        <div class="header">
+          <div class="title-bar">
+            <div class="title-bar-left">
+              <button class="menu-icon" type="button" data-open="offCanvasLeft"></button>
+              <span class="title-bar-title">root4.me</span>
             </div>
+          </div>
         </div>
+
+        <div class="row">
+          <div class="column large-8 large-centered post">
+            <article>
+              <header>
+                <span class="post-title"><h2>{{ title }}</h2></span>
+                <span class="post-meta">by {{ author }} <time datetime="{{ date }}">{{ date }}</time> </span>
+              </header>
+
+              <section class="post-content">
+                {{{content}}}
+              </section>
+              <section class="post-footer">
+
+                <div class="row">
+                  <hr/>
+                  <div class="large-6 medium-6 small-12 columns">
+                    <a href="{{ prevPage }}">{{ prevPageTitle }}</a>
+                  </div>
+                  <div class="large-6 medium-6 small-12 columns">
+                    <a class="post-footer-next" href="{{ nextPage }}">{{ nextPageTitle }}</a>
+                  </div>
+                </div>
+                <br />
+              </section>
+            </article>
+
+          </div>
+        </div>
+
         <!-- footer -->
         <footer class="footer">
-            <div class="row">
-                <div class="small-12 columns">
-                    <p class="slogan"></p>
-                    <p class="links">
-                        <a href="#">Home</a>
-                        <a href="#">Top</a>
-                    </p>
-                    <p class="copywrite">© 2015 .... Hand crafted with care. Copy, Right &#9786; </p>
-                </div>
+          <div class="row">
+            <div class="column large-8 large-centered">
+              <br />
+              <p class="links">
+                <a href="/">Home</a>
+                <a href="#">Top</a>
+              </p>
+              <p class="copywrite">&copy; 2016 .... Hand crafted with care. Copy, Right &#9786; </p>
             </div>
+          </div>
         </footer>
         <!-- end footer -->
 
+      </div>
     </div>
-    <!-- build:js js/jquery.min.js -->
-    <script src="../bower_components/jquery/dist/jquery.js "></script>
-    <!-- /build -->
-    <!-- build:js js/foundation.min.js -->
-    <script src="../bower_components/foundation/js/foundation/foundation.js "></script>
-    <!-- /build -->
-    <!-- build:js js/foundation.topbar.min.js -->
-    <script src="../bower_components/foundation/js/foundation/foundation.topbar.js "></script>
-    <!-- /build -->
+  </div>
 
-    <!-- build:js js/app.min.js -->
-    <script src="js/app.js "></script>
-    <!-- /build -->
+  <!-- build:js /javascripts/jquery.js -->
+  <script src="/javascripts/jquery.js "></script>
+  <!-- /build -->
+  <!-- build:js /javascripts/foundation.js -->
+  <script src="/javascripts/foundation.js "></script>
+  <!-- /build -->
+
+  <script src="/javascripts/site.js "></script>
 
 </body>
 

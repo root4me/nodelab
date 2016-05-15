@@ -2,151 +2,37 @@
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Technology for inquisitive minds" />
-    <title>root4me | Technology for inquisitive minds</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="root4me" />
+  <title>root4me {{ title }}</title>
 
-    <!-- build:css css/foundation.min.css -->
-    <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css" />
-    <!-- /build -->
+  <!-- build:css stylesheets/foundation.min.css -->
+  <link rel="stylesheet" href="/stylesheets/foundation.css" />
+  <!-- /build -->
 
-    <!-- build:css css/site.min.css -->
-    <link rel="stylesheet" href="css/site.css" />
-    <!-- /build -->
+  <!-- build:css stylesheets/site.min.css -->
+  <link rel="stylesheet" href="/stylesheets/site.css" />
+  <!-- /build -->
 
-    <!-- build:js js/modernizr.min.js -->
-    <script src="../bower_components/foundation/js/vendor/modernizr.js"></script>
-    <!-- /build -->
 </head>
 
 <body>
-    <div class="main-wrapper">
-        <header id="intro" class="hero">
-            <div class="intro-text">
-                <p>
-                    Learn from yesterday,
-                    <br>live for today,
-                    <br>hope for tomorrow.
-                    <br>The important thing is not to stop questioning
-                </p>
-                <br>- Albert Einstein -
-            </div>
-        </header>
-        <!-- probably better to inject overlay section and  css using javascript. That is enhancement for later -->
-        <section id="intro-overlay" class="hero-overlay">
-        </section>
 
-        <!-- 
-Nothing fancy here. Just a section to hold some content, so we can scroll.
-Too lazy to style it and get it responsive. Instead using zurb foundation grid 'row' and 'column' classes
--->
-        <section class="homecontent">
-            <div class="row">
-                <div class="column">
-                    <h1>About</h1>
-                    <p>
-                        Notes, thoughts and how-to(s), sprinkled with snippets of code to taste.
-                        <br>Experiments, that keep one engaged, beyond dreary work days.
-                        <br>Some of it are to remind, what was read, but need to refer.
-                        <br>Truth be told, the content is dry, this site itself is an experiment in progress.
-                    </p>
-                </div>
-            </div>
-        </section>
+This is the articles landing page
 
-        <section id="sporty" class="img-bg-section60">
-            <div class="section-header">
-                <h1>Top Picks</h1>
-            </div>
-        </section>
-        <section id="sporty-overlay" class="img-bg-section60-overlay">
-        </section>
 
-        <section class="homecontent">
-                {{#each rows}}
-                <div class="row">
-                    {{#each columns}}
-                    <div class="large-6 columns">
-                        
-                    {{#if ext}}
-                        <a href="{{href}}" target="_blank">
-                    {{else}}
-                        <a href="{{href}}">    
-                    {{/if}}  
-            
-                            <div class="card">
-                                <div class="header">
-                                    <img src="{{img}}">
-                                    <span class="title"><h3>{{title}}</h3></span>
-                                </div>
+<!-- build:js javascripts/jquery.js -->
+<script src="../bower_components/jquery/dist/jquery.js "></script>
+<!-- /build -->
+<!-- build:js javascripts/foundation.js -->
+<script src="../bower_components/foundation-sites/dist/foundation.js "></script>
+<!-- /build -->
 
-                                <div class=" row ">
-                                    <div class="large-2 columns authorinfo ">
-                                        <div class="namelogo ">
-                                            <img src="img/about.jpg " />
-                                        </div>
-                                        <div>
-                                            <span>{{author}}</span>
-                                            <span>{{date}}</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="large-10 columns content ">
-                                        <p>{{{desc}}}/p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {{/each}}
-                </div>
-                {{/each}}
-        </section>
-
-        <!-- footer -->
-        <footer class="footer">
-            <div class="row">
-                <div class="small-12 columns">
-                    <p class="slogan"></p>
-                    <p class="links">
-                        <a href="http://www.root4.me/">Home</a>
-                        <a href="#">Top</a>
-                    </p>
-                    <p class="copywrite">© 2015 .... Hand crafted with care. Copy, Right &#9786; </p>
-                </div>
-            </div>
-        </footer>
-        <!-- end footer -->
-
-        </div>
-
-        <!-- build:js js/jquery.min.js -->
-        <script src="../bower_components/jquery/dist/jquery.js "></script>
-        <!-- /build -->
-
-        <!-- build:js js/foundation.min.js -->
-        <script src="../bower_components/foundation/js/foundation/foundation.js "></script>
-        <!-- /build -->
-
-        <!-- build:js js/app.min.js -->
-        <script src="js/app.js "></script>
-        <!-- /build -->
-
-        <script>
-            $(window).on("load", function(e) {
-                $('#intro').scrollnfade();
-                $('#sporty').scrollnfade();
-            });
-
-            $(window).on("resize", function(e) {
-                $(document).scrollnfadeReinit(); // do this only once
-
-                $('#intro').scrollnfade();
-                $('#sporty').scrollnfade();
-            });
-        </script>
-
+<script src="/javascripts/site.js "></script>
+<scritp>
+window.location.href="/articles/linux";
+</scritp>
 </body>
 
 </html>
