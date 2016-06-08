@@ -27,6 +27,20 @@
 			"href": "descripton-from-markdown-file.html",
 			"ext": false
 		}]
+	},
+	{
+		"columns": [{
+			"img": "http://img.youtube.com/vi/84YuwX6Sr5I/0.jpg",
+			"desc": "Search for fall color #2 (youtube video)",
+			"href": "http://youtu.be/84YuwX6Sr5I",
+			"ext": true
+		},
+		{
+			"img": "img/1000x400.gif",
+			"desc": "descripton from markdown file",
+			"href": "1",
+			"ext": false
+		}]
 	}]
 }
 ---

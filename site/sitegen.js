@@ -66,41 +66,6 @@ var generatepost = function(f, p, n) {
     var template = fs.readFileSync(path.resolve(config.tfolder, config.ptemplate), 'utf8');
     var fmatter = frontMatter.loadFront(path.resolve(config.dfolder, f.name), 'content');
 
-    // index.md is a special case to generate the home screen. No need to process it like rest of the files.
-    if (f.name == "index.md") {
-
-        var pt;
-        var pb = handlebars.compile(fs.readFileSync(path.resolve(config.tfolder, "index.html"), 'utf8'));
-
-        console.log(pb);
-       /*
-        for (var i = 0; i < fmatter.rows.length; i++) {
-
-            for (var c = 0; c < fmatter.rows[i].columns.length; c++) {
-                if (fmatter.rows[i].columns[c].ext === false && !(isNaN(parseFloat(fmatter.rows[i].columns[c].href)))) {
-                    resolvehrefforid(fmatter.rows[i].columns[c]);
-                }
-            }
-
-            pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
-
-            console.log(pt);
-
-            //fs.writeFileSync(path.resolve(config.pfolder, "index" + (i + 1) + ".html"), pt, "utf8");
-        }
-    */
-           // pt = pb(JSON.parse('{ "prev" : "' + ((i === 0) ? "index.html" : "index" + (i) + ".html") + '", ' + '"next" : "' + ((i === (fmatter.rows.length - 1)) ? "" : "index" + (i + 2) + ".html") + '",' + ' "rows" :[' + JSON.stringify(fmatter.rows[i]) + ']}'));
-
-            pt = pb(fmatter);
-            console.log(pt);
-            fs.writeFileSync(path.resolve(config.pfolder, "index.html"), pt, "utf8");
-
-        //copy over the index page to output
-        //fs.createReadStream(path.resolve(config.tfolder + '/index.html')).pipe(fs.createWriteStream(path.resolve(config.pfolder + '/index.html')));
-
-        return;
-    }
-
     // If the next or previous file in the list does not have a numeric file name, do not link to them
     var pfmatter = (p !== null && !(isNaN(parseFloat(f.id))) && !(isNaN(parseFloat(p.id)))) ? frontMatter.loadFront(path.resolve(config.dfolder, p.name), 'content') : null;
     var nfmatter = (n !== null && !(isNaN(parseFloat(f.id))) && !(isNaN(parseFloat(n.id)))) ? frontMatter.loadFront(path.resolve(config.dfolder, n.name), 'content') : null;
