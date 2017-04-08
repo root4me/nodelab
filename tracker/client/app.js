@@ -41,7 +41,7 @@ function completeCurrentActivity() {
 }
 function addActivity(activity)
 {
-    
+
 }
 
 function deleteActivity(position)
@@ -66,7 +66,7 @@ function processCommand(command) {
             console.log(activities[i]);
         }
         break;
-        
+
     case 'delete':
         rl.question("position : ", function(data) {
             var position = data - 1;
@@ -160,4 +160,3 @@ function displayCurrentActivity() {
     }
     rl.prompt();
 }
-
